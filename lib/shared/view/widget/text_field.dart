@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies_app/shared/view/widget/app_theme.dart';
+import 'package:movies/shared/view/widget/app_theme.dart';
 
 class CustomTextField extends StatefulWidget {
   final String label;
@@ -56,38 +56,34 @@ class _CustomTextFieldState extends State<CustomTextField> {
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
-        prefixIcon:
-            widget.prefixImage != null
-                ? Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    width: 24,
-                    height: 24,
-                    child: Image.asset(
-                      'assets/images/${widget.prefixImage}.png',
-                      fit: BoxFit.scaleDown,
-                    ),
+        prefixIcon: widget.prefixImage != null
+            ? Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 24,
+                  height: 24,
+                  child: Image.asset(
+                    'assets/images/${widget.prefixImage}.png',
+                    fit: BoxFit.scaleDown,
                   ),
-                )
-                : (widget.prefixIcon != null
-                    ? Padding(
+                ),
+              )
+            : (widget.prefixIcon != null
+                  ? Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(widget.prefixIcon, size: 24),
                     )
-                    : null),
-        suffixIcon:
-            widget.isPassword
-                ? IconButton(
-                  icon: Icon(
-                    _obscure ? Icons.visibility_off : Icons.visibility,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _obscure = !_obscure;
-                    });
-                  },
-                )
-                : widget.suffixIcon,
+                  : null),
+        suffixIcon: widget.isPassword
+            ? IconButton(
+                icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                onPressed: () {
+                  setState(() {
+                    _obscure = !_obscure;
+                  });
+                },
+              )
+            : widget.suffixIcon,
       ),
       autovalidateMode: AutovalidateMode.onUserInteraction,
       onTapOutside: (_) {
