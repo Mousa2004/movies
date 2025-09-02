@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
@@ -13,8 +14,11 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: HomeScreen.routName,
-      routes: {HomeScreen.routName: (_) => HomeScreen()},
+      initialRoute: RegisterScreen.routName,
+      routes: {
+        HomeScreen.routName: (_) => HomeScreen(),
+        RegisterScreen.routName: (_) => RegisterScreen(),
+      },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.dark,
