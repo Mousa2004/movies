@@ -5,6 +5,8 @@ import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
+import 'auth/forgetpassword/ForgetPasswordPage.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();    ///في المينasync لازم تتكتب عشان انت استخدمتAli
   final prefs = await SharedPreferences.getInstance();
@@ -20,11 +22,13 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute:  showOnBoarding? OnBoarding.routeName : HomeScreen.routName, ///Ali
+      initialRoute: ForgetPasswordPage.routName,
       routes: {
         HomeScreen.routName: (_) => HomeScreen(),
         RegisterScreen.routName: (_) => RegisterScreen(),
         OnBoarding.routeName: (_) => OnBoarding(),
+         ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
+
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
