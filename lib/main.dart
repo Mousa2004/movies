@@ -3,6 +3,8 @@ import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
+import 'home/view/screen/update_profile_screen.dart';
+
 void main() {
   runApp(MoviesApp());
 }
@@ -14,10 +16,11 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: RegisterScreen.routName,
+      initialRoute: UpdateProfileScreen.routeName,
       routes: {
         HomeScreen.routName: (_) => HomeScreen(),
         RegisterScreen.routName: (_) => RegisterScreen(),
+        UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

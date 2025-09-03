@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
 class CustomTextField extends StatefulWidget {
-  final String label;
+  final String? label;
+  final String? hint;
   final TextEditingController controller;
   final bool isPassword;
   final TextInputType keyboardType;
@@ -14,7 +15,8 @@ class CustomTextField extends StatefulWidget {
 
   const CustomTextField({
     super.key,
-    required this.label,
+    this.label,
+    this.hint,
     required this.controller,
     this.isPassword = false,
     this.keyboardType = TextInputType.text,
