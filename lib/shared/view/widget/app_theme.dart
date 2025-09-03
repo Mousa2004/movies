@@ -7,6 +7,7 @@ class AppTheme {
   static const Color grey = Color(0xFF282A28);
   static const Color red = Color(0xFFE82626);
   static const Color green = Color(0xFF57AA53);
+  static const Color transparent = Colors.transparent;
   static ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: black,
     appBarTheme: AppBarTheme(
