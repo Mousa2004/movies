@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/view/widget/switch_language.dart';
+import 'package:movies/shared/view/widget/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -11,14 +13,14 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppTheme.black,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Logo (your image)
+              // Logo
               Center(
                 child: Image.asset(
                   "assets/images/Logo.png",
@@ -28,15 +30,15 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 50),
 
-              // Email TextField
+              // Email Field
               TextField(
-                style: const TextStyle(color: Colors.white),
+                style: TextStyle(color: AppTheme.white),
                 decoration: InputDecoration(
                   hintText: "Email",
-                  hintStyle: const TextStyle(color: Colors.white70),
-                  prefixIcon: const Icon(Icons.email, color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.white70),
+                  prefixIcon: Icon(Icons.email, color: AppTheme.white),
                   filled: true,
-                  fillColor: Colors.grey[900],
+                  fillColor: AppTheme.grey,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
@@ -45,20 +47,20 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Password TextField
+              // Password Field
               TextField(
                 obscureText: _obscurePassword,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: AppTheme.white),
                 decoration: InputDecoration(
                   hintText: "Password",
-                  hintStyle: const TextStyle(color: Colors.white70),
-                  prefixIcon: const Icon(Icons.lock, color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.white70),
+                  prefixIcon: Icon(Icons.lock, color: AppTheme.white),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _obscurePassword
                           ? Icons.visibility_off
                           : Icons.visibility,
-                      color: Colors.white,
+                      color: AppTheme.white,
                     ),
                     onPressed: () {
                       setState(() {
@@ -67,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   filled: true,
-                  fillColor: Colors.grey[900],
+                  fillColor: AppTheme.grey,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide.none,
@@ -80,9 +82,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     "Forget Password ?",
-                    style: TextStyle(color: Colors.yellow),
+                    style: TextStyle(color: AppTheme.yellow),
                   ),
                 ),
               ),
@@ -94,14 +96,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow,
-                    foregroundColor: Colors.black,
+                    backgroundColor: AppTheme.yellow,
+                    foregroundColor: AppTheme.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     "Login",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
@@ -113,16 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     "Don't Have Account ? ",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: AppTheme.white),
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: const Text(
+                    child: Text(
                       "Create One",
                       style: TextStyle(
-                        color: Colors.yellow,
+                        color: AppTheme.yellow,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -133,32 +135,40 @@ class _LoginScreenState extends State<LoginScreen> {
 
               // OR Divider
               Row(
-                children: const [
-                  Expanded(child: Divider(color: Colors.yellow, thickness: 1)),
+                children: [
+                  Expanded(
+                    child: Divider(color: AppTheme.yellow, thickness: 1),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Text("OR", style: TextStyle(color: Colors.yellow)),
+                    child: Text("OR", style: TextStyle(color: AppTheme.yellow)),
                   ),
-                  Expanded(child: Divider(color: Colors.yellow, thickness: 1)),
+                  Expanded(
+                    child: Divider(color: AppTheme.yellow, thickness: 1),
+                  ),
                 ],
               ),
               const SizedBox(height: 20),
 
-              // Google Login Button
+              // Google Login
               SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow,
-                    foregroundColor: Colors.black,
+                    backgroundColor: AppTheme.yellow,
+                    foregroundColor: AppTheme.black,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
                   onPressed: () {},
-                  icon: const Icon(Icons.g_mobiledata, size: 30),
-                  label: const Text(
+                  icon: Image.asset(
+                    "assets/images/google.png",
+                    width: 30,
+                    height: 30,
+                  ),
+                  label: Text(
                     "Login With Google",
                     style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
@@ -166,15 +176,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 30),
 
-              // Language Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset("assets/images/en.png", width: 40, height: 40),
-                  const SizedBox(width: 16),
-                  Image.asset("assets/images/ar.png", width: 40, height: 40),
-                ],
-              ),
+              // Switch Language Widget
+              SwitchLanguage(onTapEnlish: () {}, onTapArabic: () {}),
             ],
           ),
         ),
