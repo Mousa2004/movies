@@ -5,6 +5,7 @@ import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 import 'home/view/screen/update_profile_screen.dart';
+import 'auth/forgetpassword/ForgetPasswordPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();    ///في المينasync لازم تتكتب عشان انت استخدمتAli
@@ -28,6 +29,7 @@ class MoviesApp extends StatelessWidget {
         RegisterScreen.routName: (_) => RegisterScreen(),
         OnBoarding.routeName: (_) => OnBoarding(),
         UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+        ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -35,3 +37,4 @@ class MoviesApp extends StatelessWidget {
     );
   }
 }
+
