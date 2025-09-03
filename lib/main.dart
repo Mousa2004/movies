@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
@@ -29,7 +30,8 @@ class MoviesApp extends StatelessWidget {
         RegisterScreen.routName: (_) => RegisterScreen(),
         OnBoarding.routeName: (_) => OnBoarding(),
         UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
-        ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
+        ForgetPasswordPage.routeName: (_) => ForgetPasswordPage(),
+        LoginScreen.routeName: (_) => ForgetPasswordPage(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

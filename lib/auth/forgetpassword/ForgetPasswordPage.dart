@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import '../../shared/view/widget/text_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
-  static const String routName = '/ForgetPasswordPage';
+  static const String routeName = '/ForgetPasswordPage';
+
 
   @override
   _ForgetPasswordPageState createState() => _ForgetPasswordPageState();

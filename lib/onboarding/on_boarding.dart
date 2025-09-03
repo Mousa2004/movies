@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/onboarding/on_boarding_model.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
@@ -107,10 +108,8 @@ class _OnBoardingState extends State<OnBoarding> {
         curve: Curves.easeInOut,
       );
     } else {
-      await saveOnBoarding();
-
-      ///هنا انا بدي معلومه انه استسخدم الاون بوردينج
-      Navigator.pushReplacementNamed(context, HomeScreen.routName);
+      await saveOnBoarding();///هنا انا بدي معلومه انه استسخدم الاون بوردينج
+      Navigator.pushReplacementNamed(context, RegisterScreen.routName);
     }
   }
 

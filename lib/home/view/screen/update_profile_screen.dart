@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/forgetpassword/ForgetPasswordPage.dart';
+import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/text_field.dart';
@@ -102,7 +104,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               text: "Update Data",
               colorButton: AppTheme.yellow,
               colorText: AppTheme.black,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed(HomeScreen.routName);
+              },
             ),
           ],
         ),

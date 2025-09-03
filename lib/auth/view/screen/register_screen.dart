@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:movies/auth/view/screen/login_screen.dart';
 
 import 'package:movies/auth/view/widget/slider_image.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
+import 'package:movies/home/view/screen/update_profile_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/text_field.dart';
@@ -85,7 +87,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
           const SizedBox(height: 24),
-          CustomedButton(text: "Create Account", onPressed: () {}),
+          CustomedButton(text: "Create Account", onPressed: () {
+            Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+          }),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -96,7 +100,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ).textTheme.titleSmall!.copyWith(color: AppTheme.white),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);},
                 child: Text(
                   "Login",
                   style: Theme.of(

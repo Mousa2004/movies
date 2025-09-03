@@ -3,6 +3,7 @@ import 'package:movies/auth/view/widget/switch_language.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const String routeName = "/LoginScreen";
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
