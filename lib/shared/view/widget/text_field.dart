@@ -48,8 +48,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       decoration: InputDecoration(
-        labelText: widget.label,
-        labelStyle: Theme.of(
+        labelText: widget.label,   ///hint no label Ali
+        labelStyle: Theme.of(      ///hint no label Ali
           context,
         ).textTheme.titleMedium?.copyWith(color: AppTheme.white),
         filled: true,
