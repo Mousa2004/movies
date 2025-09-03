@@ -4,7 +4,7 @@ import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
-
+import 'home/view/screen/update_profile_screen.dart';
 import 'auth/forgetpassword/ForgetPasswordPage.dart';
 
 void main() async {
@@ -18,17 +18,18 @@ void main() async {
 class MoviesApp extends StatelessWidget {
   MoviesApp({super.key, required this.showOnBoarding});///Ali
   final bool showOnBoarding;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: ForgetPasswordPage.routName,
+      initialRoute: showOnBoarding ? OnBoarding.routeName : HomeScreen.routName, ///Ali
       routes: {
         HomeScreen.routName: (_) => HomeScreen(),
         RegisterScreen.routName: (_) => RegisterScreen(),
         OnBoarding.routeName: (_) => OnBoarding(),
-         ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
-
+        UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+        ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
       },
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
@@ -36,3 +37,4 @@ class MoviesApp extends StatelessWidget {
     );
   }
 }
+
