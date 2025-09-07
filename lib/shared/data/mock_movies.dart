@@ -1,11 +1,13 @@
 class Movie {
   final String title;
-  final String posterUrl;
+  final String description;
+  final String image;
   final double rating;
 
   const Movie({
     required this.title,
-    required this.posterUrl,
+    required this.description,
+    required this.image,
     required this.rating,
   });
 }
@@ -13,32 +15,38 @@ class Movie {
 const List<Movie> kDemoMovies = [
   Movie(
     title: 'Black Widow',
-    posterUrl: 'assets/images/blackwidow.jpg',
+    description: 'An action spy movie.',
+    image: 'assets/images/blackwidow.png',
     rating: 7.7,
   ),
   Movie(
     title: 'Captain America',
-    posterUrl: 'assets/images/captain.jpg',
-    rating: 7.5,
+    description: 'Superhero action and drama.',
+    image: 'assets/images/captain.png',
+    rating: 7.6,
   ),
   Movie(
     title: 'Iron Man 3',
-    posterUrl: 'assets/images/ironman3.jpg',
-    rating: 7.4,
+    description: 'Tony Stark faces a new threat.',
+    image: 'assets/images/ironman3.png',
+    rating: 7.2,
   ),
   Movie(
     title: 'Civil War',
-    posterUrl: 'assets/images/civilwar.jpg',
+    description: 'Heroes divided in an epic conflict.',
+    image: 'assets/images/civilwar.png',
     rating: 7.8,
   ),
   Movie(
     title: 'Avengers',
-    posterUrl: 'assets/images/avengers.jpg',
+    description: 'The team unites to save the world.',
+    image: 'assets/images/avengers.png',
     rating: 8.0,
   ),
   Movie(
     title: 'Doctor Strange',
-    posterUrl: 'assets/images/strange.jpg',
-    rating: 7.6,
+    description: 'Mystic arts and alternate dimensions.',
+    image: 'assets/images/strange.png',
+    rating: 7.5,
   ),
 ];
