@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '../../shared/view/widget/text_field.dart';
+import 'package:movies/shared/view/widget/text_field.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
   static const String routName = '/ForgetPasswordPage';
+
+  const ForgetPasswordPage({super.key});
 
   @override
   _ForgetPasswordPageState createState() => _ForgetPasswordPageState();
@@ -14,7 +15,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    var height=MediaQuery.of(context).size.height;
+    var height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -30,7 +31,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             Image.asset(
               'assets/images/Forgot_password-bro 1.png',
               width: double.infinity,
-              height: height* 0.3 ,
+              height: height * 0.3,
               fit: BoxFit.fill,
             ),
 

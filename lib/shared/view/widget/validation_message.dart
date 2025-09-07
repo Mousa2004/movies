@@ -1,4 +1,10 @@
-String? validationMessage(String val, int max, int min, String type) {
+String? validationMessage(
+  String val,
+  int max,
+  int min,
+  String type, {
+  String? originalPassword,
+}) {
   if (val.isEmpty) {
     return "The field cannot be empty";
   } else if (val.length < min) {
@@ -15,11 +21,22 @@ String? validationMessage(String val, int max, int min, String type) {
       break;
 
     case "phone":
-      if (!RegExp(r'^[0-9]+$').hasMatch(val)) {
-        return "Phone number must contain only digits";
+      if (!val.startsWith("+20")) {
+        return "Phone number must start with +20";
       }
-      if (val.length < 10) {
-        return "Phone number must be at least 10 digits";
+
+      String withoutPrefix = val.substring(3);
+
+      if (!RegExp(r'^[0-9]+$').hasMatch(withoutPrefix)) {
+        return "Phone number must contain only digits after +20";
+      }
+
+      if (withoutPrefix.length < 10) {
+        return "Phone number must be at least 10 digits after +20";
+      }
+
+      if (withoutPrefix.length > 10) {
+        return "Phone number cannot exceed 10 digits after +20";
       }
       break;
 
@@ -29,12 +46,17 @@ String? validationMessage(String val, int max, int min, String type) {
       ).hasMatch(val)) {
         return "Password must contain uppercase, lowercase, number and @";
       }
-
       break;
 
     case "name":
       if (!RegExp(r'^[a-zA-Z ]+$').hasMatch(val)) {
         return "Name can only contain letters";
+      }
+      break;
+
+    case "confirmPassword":
+      if (originalPassword != null && val != originalPassword) {
+        return "Passwords do not match";
       }
       break;
   }

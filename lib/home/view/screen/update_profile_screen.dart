@@ -13,8 +13,12 @@ class UpdateProfileScreen extends StatefulWidget {
 }
 
 class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
-  TextEditingController nameController = TextEditingController(text: "John Safwat");
-  TextEditingController phoneController = TextEditingController(text: "01200000000");
+  TextEditingController nameController = TextEditingController(
+    text: "John Safwat",
+  );
+  TextEditingController phoneController = TextEditingController(
+    text: "01200000000",
+  );
 
   int selectedAvatar = 1;
 
@@ -52,7 +56,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               },
               child: CircleAvatar(
                 radius: 50,
-                backgroundImage: AssetImage("assets/images/${avatars[selectedAvatar - 1]}.png"),
+                backgroundImage: AssetImage(
+                  "assets/images/${avatars[selectedAvatar - 1]}.png",
+                ),
               ),
             ),
             const SizedBox(height: 20),
@@ -78,7 +84,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
               alignment: Alignment.centerLeft,
               child: Text(
                 "Reset Password",
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: AppTheme.white),
+                style: Theme.of(
+                  context,
+                ).textTheme.titleMedium?.copyWith(color: AppTheme.white),
               ),
             ),
             const SizedBox(height: 30),
