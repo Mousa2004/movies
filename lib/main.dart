@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
-import 'package:movies/home/view/screen/home_screen.dart';
+import 'package:movies/movies/data/bloc/movies_bloc.dart';
+import 'package:movies/movies/view/screen/home_screen.dart';
+import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
-import 'home/view/screen/update_profile_screen.dart';
 import 'auth/forgetpassword/ForgetPasswordPage.dart';
 
 void main() async {
@@ -22,20 +24,23 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: showOnBoarding ? OnBoarding.routeName : HomeScreen.routName, ///Ali
-      routes: {
-        HomeScreen.routName: (_) => HomeScreen(),
-        RegisterScreen.routName: (_) => RegisterScreen(),
-        OnBoarding.routeName: (_) => OnBoarding(),
-        UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
-        ForgetPasswordPage.routeName: (_) => ForgetPasswordPage(),
-        LoginScreen.routeName: (_) => ForgetPasswordPage(),
-      },
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+    return BlocProvider(
+      create: (_)=> MoviesBloc()..loadMovies(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute:showOnBoarding ? OnBoarding.routeName : HomeScreen.routName, ///Ali
+        routes: {
+          HomeScreen.routName: (_) => HomeScreen(),
+          RegisterScreen.routName: (_) => RegisterScreen(),
+          OnBoarding.routeName: (_) => OnBoarding(),
+          UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+          ForgetPasswordPage.routeName: (_) => ForgetPasswordPage(),
+          LoginScreen.routeName: (_) => ForgetPasswordPage(),
+        },
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.dark,
+      ),
     );
   }
 }
