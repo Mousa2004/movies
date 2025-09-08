@@ -12,6 +12,7 @@ class AppTheme {
     scaffoldBackgroundColor: black,
     appBarTheme: AppBarTheme(
       backgroundColor: black,
+      iconTheme: IconThemeData(color: yellow),
       centerTitle: true,
       titleTextStyle: TextStyle(
         fontSize: 16,

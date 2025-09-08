@@ -10,7 +10,7 @@ import 'package:movies/shared/view/widget/my_bloc_observer.dart';
 import 'package:shared_preferences/shared_preferences.dart'
     show SharedPreferences;
 import 'home/view/screen/update_profile_screen.dart';
-import 'auth/view/screen/ForgetPasswordPage.dart';
+import 'auth/view/screen/forget_password_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

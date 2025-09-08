@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_bloc.dart';
 import 'package:movies/auth/cubit/auth_state.dart';
 import 'package:movies/auth/data/models/login_request.dart';
+import 'package:movies/auth/view/screen/forget_password_page.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
 import 'package:movies/home/view/screen/update_profile_screen.dart';
@@ -86,7 +87,11 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pushNamed(ForgetPasswordPage.routName);
+                  },
                   child: Text(
                     "Forget Password ?",
                     style: Theme.of(

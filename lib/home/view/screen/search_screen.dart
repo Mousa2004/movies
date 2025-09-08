@@ -61,101 +61,136 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
       body: isEmptyQuery
           ? Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              'assets/images/popcorn.png',
-              height: 140,
-              errorBuilder: (ctx, e, s) => const Icon(Icons.local_movies_outlined, size: 96, color: Colors.amber),
-            ),
-            const SizedBox(height: 14),
-            const Text('Start searching for movies', style: TextStyle(color: Colors.white70)),
-          ],
-        ),
-      )
-          : _results.isEmpty
-          ? const Center(child: Text('No results found', style: TextStyle(color: Colors.white70)))
-          : Padding(
-        padding: const EdgeInsets.all(12),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 0.62,
-          ),
-          itemCount: _results.length,
-          itemBuilder: (ctx, i) {
-            final movie = _results[i];
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: Stack(
-                fit: StackFit.expand,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Poster
                   Image.asset(
-                    movie.image,
-                    fit: BoxFit.cover,
-                    errorBuilder: (c, e, s) => Container(
-                      color: Colors.grey[900],
-                      child: const Icon(Icons.movie, size: 48, color: Colors.white24),
+                    'assets/images/popcorn.png',
+                    height: 140,
+                    errorBuilder: (ctx, e, s) => const Icon(
+                      Icons.local_movies_outlined,
+                      size: 96,
+                      color: Colors.amber,
                     ),
                   ),
-
-                  // Bottom gradient + title
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.bottomCenter,
-                          end: Alignment.topCenter,
-                          colors: [Colors.black87, Colors.transparent],
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            movie.title,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  // Rating badge (top-left)
-                  Positioned(
-                    top: 8,
-                    left: 8,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Row(
-                        children: [
-                          Text(movie.rating.toStringAsFixed(1), style: const TextStyle(color: Colors.amber, fontWeight: FontWeight.w700)),
-                          const SizedBox(width: 4),
-                          const Icon(Icons.star, size: 14, color: Colors.amber),
-                        ],
-                      ),
-                    ),
+                  const SizedBox(height: 14),
+                  const Text(
+                    'Start searching for movies',
+                    style: TextStyle(color: Colors.white70),
                   ),
                 ],
               ),
-            );
-          },
-        ),
-      ),
+            )
+          : _results.isEmpty
+          ? const Center(
+              child: Text(
+                'No results found',
+                style: TextStyle(color: Colors.white70),
+              ),
+            )
+          : Padding(
+              padding: const EdgeInsets.all(12),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 12,
+                  childAspectRatio: 0.62,
+                ),
+                itemCount: _results.length,
+                itemBuilder: (ctx, i) {
+                  final movie = _results[i];
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        // Poster
+                        Image.asset(
+                          movie.image,
+                          fit: BoxFit.cover,
+                          errorBuilder: (c, e, s) => Container(
+                            color: Colors.grey[900],
+                            child: const Icon(
+                              Icons.movie,
+                              size: 48,
+                              color: Colors.white24,
+                            ),
+                          ),
+                        ),
+
+                        // Bottom gradient + title
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 8,
+                            ),
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [Colors.black87, Colors.transparent],
+                              ),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  movie.title,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        // Rating badge (top-left)
+                        Positioned(
+                          top: 8,
+                          left: 8,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
+                              children: [
+                                Text(
+                                  movie.rating.toStringAsFixed(1),
+                                  style: const TextStyle(
+                                    color: Colors.amber,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const SizedBox(width: 4),
+                                const Icon(
+                                  Icons.star,
+                                  size: 14,
+                                  color: Colors.amber,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
     );
   }
 }
