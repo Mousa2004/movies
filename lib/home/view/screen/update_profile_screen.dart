@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/data/data_sources/image_list_data_sources.dart';
+import 'package:movies/auth/view/screen/register_screen.dart';
+import 'package:movies/home/cubit/delete_profile_bloc.dart';
+import 'package:movies/home/cubit/delete_profile_state.dart';
 import 'package:movies/home/cubit/update_profile_bloc.dart';
 import 'package:movies/home/cubit/update_profile_state.dart';
 import 'package:movies/home/data/models/update_profile_request.dart';
@@ -38,8 +41,11 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       top: false,
-      child: BlocProvider(
-        create: (context) => UpdateProfileBloc(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => UpdateProfileBloc()),
+          BlocProvider(create: (context) => DeleteProfileBloc()),
+        ],
         child: Scaffold(
           appBar: AppBar(
             title: Text("Update Profile"),
@@ -113,11 +119,33 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                CustomedButton(
-                  text: "Delete Account",
-                  colorButton: AppTheme.red,
-                  colorText: AppTheme.white,
-                  onPressed: () {},
+                BlocConsumer<DeleteProfileBloc, DeleteProfileState>(
+                  listener: (context, state) {
+                    if (state is DeleteProfileError) {
+                      DialogMessage.showErrorMessage(state.message);
+                    } else if (state is DeleteProfileSuccess) {
+                      DialogMessage.showSuccessMessage(
+                        "Profile delete successfully",
+                      );
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(RegisterScreen.routName);
+                    }
+                  },
+                  builder: (context, state) {
+                    return CustomedButton(
+                      text: state is DeleteProfileLoading
+                          ? "Loading..."
+                          : "Delete Account",
+                      colorButton: AppTheme.red,
+                      colorText: AppTheme.white,
+                      onPressed: state is DeleteProfileLoading
+                          ? null
+                          : () {
+                              context.read<DeleteProfileBloc>().deleteProfile();
+                            },
+                    );
+                  },
                 ),
                 const SizedBox(height: 12),
 

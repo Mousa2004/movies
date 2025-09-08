@@ -35,7 +35,11 @@ class AuthBloc extends Cubit<AuthState> {
       await loginRepository.login(loginRequest);
       emit(LoginSuccess());
     } on RemoteException catch (error) {
-      emit(LoginError(message: error.toString()));
+      emit(LoginError(message: error.message ?? "Remote error occurred"));
+    } on RepositoryException catch (error) {
+      emit(LoginError(message: error.message ?? "Repository error occurred"));
+    } catch (e) {
+      emit(LoginError(message: "Unexpected error: $e"));
     }
   }
 }
