@@ -14,9 +14,9 @@ class DialogMessage {
     );
   }
 
-  static void showSuccessMessage() {
+  static void showSuccessMessage([String? message]) {
     Fluttertoast.showToast(
-      msg: "Successfully",
+      msg: message ?? "Successfully",
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,

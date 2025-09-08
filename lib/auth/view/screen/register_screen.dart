@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_bloc.dart';
 import 'package:movies/auth/cubit/auth_state.dart';
 import 'package:movies/auth/data/models/register_request.dart';
+import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/widget/slider_image.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
@@ -132,40 +133,45 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            BlocListener<AuthBloc, AuthState>(
+            BlocConsumer<AuthBloc, AuthState>(
               listener: (context, state) {
                 if (state is RegisterError) {
                   DialogMessage.showErrorMessage(state.message);
                 } else if (state is RegisterSuccess) {
+                  DialogMessage.showSuccessMessage();
                   Navigator.of(
                     context,
                   ).pushReplacementNamed(HomeScreen.routName);
-                  DialogMessage.showSuccessMessage();
                 }
               },
-
-              child: CustomedButton(
-                text: "Create Account",
-                onPressed: () {
-                  if (formState.currentState!.validate()) {
-                    if (selectAvatar == null) {
-                      return DialogMessage.showErrorMessage(
-                        "Please select your avatar",
-                      );
-                    }
-                    context.read<AuthBloc>().register(
-                      RegisterRequest(
-                        name: nameController.text,
-                        email: emailController.text,
-                        password: passwordController.text,
-                        confirmPassword: confirmPasswordController.text,
-                        phone: phoneController.text,
-                        avaterId: selectAvatar!,
-                      ),
-                    );
-                  }
-                },
-              ),
+              builder: (context, state) {
+                return CustomedButton(
+                  text: state is RegisterLoading
+                      ? "Loading..."
+                      : "Create Account",
+                  onPressed: state is RegisterLoading
+                      ? null
+                      : () {
+                          if (formState.currentState!.validate()) {
+                            if (selectAvatar == null) {
+                              return DialogMessage.showErrorMessage(
+                                "Please select your avatar",
+                              );
+                            }
+                            context.read<AuthBloc>().register(
+                              RegisterRequest(
+                                name: nameController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                confirmPassword: confirmPasswordController.text,
+                                phone: phoneController.text,
+                                avaterId: selectAvatar!,
+                              ),
+                            );
+                          }
+                        },
+                );
+              },
             ),
 
             Row(
@@ -178,7 +184,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ).textTheme.titleSmall!.copyWith(color: AppTheme.white),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(LoginScreen.routName);
+                  },
                   child: Text(
                     "Login",
                     style: Theme.of(

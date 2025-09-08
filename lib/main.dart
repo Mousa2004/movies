@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_bloc.dart';
+import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/view/screen/home_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
@@ -38,7 +39,7 @@ class MoviesApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
-            : RegisterScreen.routName,
+            : LoginScreen.routName,
 
         ///Ali
         routes: {
@@ -47,6 +48,7 @@ class MoviesApp extends StatelessWidget {
           OnBoarding.routeName: (_) => OnBoarding(),
           UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
           ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
+          LoginScreen.routName: (_) => LoginScreen(),
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
