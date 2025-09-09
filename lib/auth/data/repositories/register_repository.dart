@@ -1,4 +1,4 @@
-import 'package:movies/auth/data/data_sources/register_api_data_sources.dart';
+import 'package:movies/auth/data/data_sources/remote/register_api_data_sources.dart';
 import 'package:movies/auth/data/models/register_request.dart';
 import 'package:movies/auth/data/models/register_response.dart';
 import 'package:movies/shared/view/widget/app_exception.dart';
