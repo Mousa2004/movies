@@ -88,9 +88,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pushNamed(ForgetPasswordPage.routName);
+                    if (formState.currentState!.validate()) {
+                      Navigator.of(
+                        context,
+                      ).pushNamed(ForgetPasswordPage.routName);
+                    }
                   },
                   child: Text(
                     "Forget Password ?",
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     DialogMessage.showSuccessMessage();
                     Navigator.of(
                       context,
-                    ).pushReplacementNamed(UpdateProfileScreen.routeName);
+                    ).pushReplacementNamed(UpdateProfileScreen.routName);
                   }
                 },
                 builder: (context, state) {

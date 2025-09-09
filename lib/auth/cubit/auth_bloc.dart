@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_state.dart';
 import 'package:movies/auth/data/models/login_request.dart';
 import 'package:movies/auth/data/models/register_request.dart';
-
 import 'package:movies/auth/data/repositories/login_repository.dart';
 import 'package:movies/auth/data/repositories/register_repository.dart';
 import 'package:movies/shared/view/widget/Service_locator.dart';

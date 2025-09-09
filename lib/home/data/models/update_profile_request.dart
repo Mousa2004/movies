@@ -31,7 +31,7 @@ class UpdateProfileRequest {
     if (password != null) data['password'] = password;
     if (confirmPassword != null) data['confirmPassword'] = confirmPassword;
     if (phone != null) data['phone'] = phone;
-    if (avaterId != null) data['avatarId'] = avaterId;
+    if (avaterId != null) data['avaterId'] = avaterId;
     return data;
   }
 }
