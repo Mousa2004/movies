@@ -23,7 +23,7 @@ class MoviesApp extends StatelessWidget {
     Widget build(BuildContext context) {
         return MaterialApp(
             debugShowCheckedModeBanner: false,
-            initialRoute: showOnBoarding ? OnBoarding.routeName : HomeScreen.routName, ///Ali
+            initialRoute: HomeScreen.routName, ///Ali
             routes: {
                 HomeScreen.routName:(_) => HomeScreen(),
                 RegisterScreen.routName:(_) => RegisterScreen(),
