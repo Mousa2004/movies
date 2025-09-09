@@ -48,10 +48,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       decoration: InputDecoration(
-        labelText: widget.label,   ///hint no label Ali
-        labelStyle: Theme.of(      ///hint no label Ali
+        hintText: widget.hint,
+        hintStyle: Theme.of(
           context,
         ).textTheme.titleMedium?.copyWith(color: AppTheme.white),
+        labelText: widget.label,
+
+        ///hint no label Ali
+        labelStyle: Theme.of(
+          ///hint no label Ali
+          context,
+        ).textTheme.titleMedium?.copyWith(color: AppTheme.white),
+
         filled: true,
         fillColor: widget.fillColor ?? AppTheme.grey,
         border: OutlineInputBorder(
@@ -66,7 +74,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   height: 24,
                   child: Image.asset(
                     'assets/images/${widget.prefixImage}.png',
-                    fit: BoxFit.scaleDown,
+                    fit: BoxFit.contain,
                   ),
                 ),
               )
@@ -78,7 +86,10 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   : null),
         suffixIcon: widget.isPassword
             ? IconButton(
-                icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                icon: Icon(
+                  _obscure ? Icons.visibility_off : Icons.visibility,
+                  color: AppTheme.white,
+                ),
                 onPressed: () {
                   setState(() {
                     _obscure = !_obscure;

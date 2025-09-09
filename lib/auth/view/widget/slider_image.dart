@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movies/auth/data/data_sources/image_list_data_sources.dart';
 
 class SliderImage extends StatelessWidget {
-  final void Function() onTap;
+  final void Function(int id) onTap;
+
   const SliderImage({super.key, required this.onTap});
 
   @override
@@ -17,7 +18,9 @@ class SliderImage extends StatelessWidget {
       ),
       itemCount: imageAvatarList.length,
       itemBuilder: (BuildContext context, int itemIndex, _) => InkWell(
-        onTap: onTap,
+        onTap: () {
+          onTap(imageAvatarList[itemIndex].id);
+        },
         child: Image.asset(
           imageAvatarList[itemIndex].imageName,
           height: 161,
