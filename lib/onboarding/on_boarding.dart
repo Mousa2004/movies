@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/auth/view/screen/register_screen.dart';
+import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/onboarding/on_boarding_model.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -87,16 +87,14 @@ class _OnBoardingState extends State<OnBoarding> {
   // @override
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppTheme.black,
-        body: PageView.builder(
-          controller: pageController,
-          itemCount: onBoardingPage.length,
-          itemBuilder: (context, index) {
-            return onBoardingPage[index];
-          },
-        ),
+    return Scaffold(
+      backgroundColor: AppTheme.black,
+      body: PageView.builder(
+        controller: pageController,
+        itemCount: onBoardingPage.length,
+        itemBuilder: (context, index) {
+          return onBoardingPage[index];
+        },
       ),
     );
   }
@@ -109,8 +107,10 @@ class _OnBoardingState extends State<OnBoarding> {
         curve: Curves.easeInOut,
       );
     } else {
-      await saveOnBoarding();///هنا انا بدي معلومه انه استسخدم الاون بوردينج
-      Navigator.pushReplacementNamed(context, RegisterScreen.routName);
+      await saveOnBoarding();
+
+      ///هنا انا بدي معلومه انه استسخدم الاون بوردينج
+      Navigator.pushReplacementNamed(context, HomeScreen.routName);
     }
   }
 
