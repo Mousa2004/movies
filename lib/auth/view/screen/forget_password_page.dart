@@ -54,9 +54,7 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
             text: "Verify Email",
             fontSize: 20,
             colorText: AppTheme.black,
-            onPressed: () {
-              if (formState.currentState!.validate()) {}
-            },
+            onPressed: () {},
           ),
         ],
       ),

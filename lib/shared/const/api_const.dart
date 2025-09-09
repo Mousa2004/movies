@@ -5,6 +5,8 @@ class ApiConst {
 
   static const String loginEndPoint = "auth/login";
 
+  static const String resetPasswordEndPoint = "auth/reset-password";
+
   static const String updateProfileEndPoint = "profile";
 }
 

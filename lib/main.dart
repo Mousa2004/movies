@@ -46,7 +46,7 @@ class MoviesApp extends StatelessWidget {
           HomeScreen.routName: (_) => HomeScreen(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
-          UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
           ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
           LoginScreen.routName: (_) => LoginScreen(),
         },
