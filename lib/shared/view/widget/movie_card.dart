@@ -7,6 +7,14 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // هنا تحط الكود اللي يرسم الكارد
+    return Container();
+  }
+}
+
+
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Stack(

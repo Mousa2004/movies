@@ -27,6 +27,33 @@ void main() async {
 
 class MoviesApp extends StatelessWidget {
   const MoviesApp({super.key, required this.showOnBoarding});
+  final bool showOnBoarding;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => AuthBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: showOnBoarding
+            ? OnBoarding.routeName
+            : LoginScreen.routName,
+        routes: {
+          HomeScreen.routName: (_) => HomeScreen(),
+          RegisterScreen.routName: (_) => RegisterScreen(),
+          OnBoarding.routeName: (_) => OnBoarding(),
+          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
+          ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
+          LoginScreen.routName: (_) => LoginScreen(),
+        },
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.dark,
+      ),
+    );
+  }
+}
+
 
   ///Ali
   final bool showOnBoarding;

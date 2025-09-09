@@ -73,30 +73,20 @@ class _BrowseTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Center(child: Text('Browse', style: TextStyle(fontSize: 22))),
-    );
+    return const SafeArea(child: MovieGridWithCategories());
   }
 }
 
-class _GalleryTab extends StatelessWidget {
-  const _GalleryTab();
+class MovieGridWithCategories extends StatefulWidget {
+  const MovieGridWithCategories({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Center(child: Text('Gallery', style: TextStyle(fontSize: 22))),
-    );
-  }
+  _MovieGridWithCategoriesState createState() =>
+      _MovieGridWithCategoriesState();
 }
 
-class _ProfileTab extends StatelessWidget {
-  const _ProfileTab();
+class _MovieGridWithCategoriesState extends State<MovieGridWithCategories> {
+  final List<String> categories = [
+    'All',
+    'Action',
 
-  @override
-  Widget build(BuildContext context) {
-    return const SafeArea(
-      child: Center(child: Text('Profile', style: TextStyle(fontSize: 22))),
-    );
-  }
-}
