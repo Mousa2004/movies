@@ -6,7 +6,8 @@ import 'package:movies/auth/data/models/login_request.dart';
 import 'package:movies/auth/view/screen/forget_password_page.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
-import 'package:movies/home/view/screen/update_profile_screen.dart';
+import 'package:movies/movies/view/screen/home_screen.dart';
+import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/dialog_message.dart';
@@ -112,7 +113,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     DialogMessage.showSuccessMessage();
                     Navigator.of(
                       context,
-                    ).pushReplacementNamed(UpdateProfileScreen.routName);
+                    ).pushReplacementNamed(HomeScreen.routName);
                   }
                 },
                 builder: (context, state) {
