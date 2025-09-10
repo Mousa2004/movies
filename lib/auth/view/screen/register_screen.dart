@@ -152,24 +152,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: state is RegisterLoading
                       ? null
                       : () {
-                    if (formState.currentState!.validate()) {
-                      if (selectAvatar == null) {
-                        return DialogMessage.showErrorMessage(
-                          "Please select your avatar",
-                        );
-                      }
-                      context.read<AuthBloc>().register(
-                        RegisterRequest(
-                          name: nameController.text,
-                          email: emailController.text,
-                          password: passwordController.text,
-                          confirmPassword: confirmPasswordController.text,
-                          phone: phoneController.text,
-                          avaterId: selectAvatar!,
-                        ),
-                      );
-                    }
-                  },
+                          if (formState.currentState!.validate()) {
+                            if (selectAvatar == null) {
+                              return DialogMessage.showErrorMessage(
+                                "Please select your avatar",
+                              );
+                            }
+                            context.read<AuthBloc>().register(
+                              RegisterRequest(
+                                name: nameController.text,
+                                email: emailController.text,
+                                password: passwordController.text,
+                                confirmPassword: confirmPasswordController.text,
+                                phone: phoneController.text,
+                                avaterId: selectAvatar!,
+                              ),
+                            );
+                          }
+                        },
                 );
               },
             ),
@@ -187,7 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () {
                     Navigator.of(
                       context,
-                    ).pushReplacementNamed(LoginScreen.routeName);
+                    ).pushReplacementNamed(LoginScreen.routName);
                   },
                   child: Text(
                     "Login",

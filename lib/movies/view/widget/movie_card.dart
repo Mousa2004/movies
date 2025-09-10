@@ -5,7 +5,7 @@ import 'package:movies/shared/view/widget/app_theme.dart';
 
 class MovieCard extends StatelessWidget {
   MovieModel movie;
-   MovieCard({super.key,required this.movie});
+   MovieCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {

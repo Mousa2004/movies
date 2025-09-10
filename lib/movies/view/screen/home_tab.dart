@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies/data/bloc/movies_state.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
-import '../data/bloc/movies_bloc.dart';
-import 'widget/LoadingIndicator.dart';
-import 'widget/movie_card.dart';
+import '../../data/bloc/movies_bloc.dart';
+import '../widget/LoadingIndicator.dart';
+import '../widget/movie_card.dart';
 
 
 class HomeTab extends StatelessWidget {

@@ -1,41 +1,50 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/auth/cubit/auth_bloc.dart';
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
-import 'package:movies/movies/data/bloc/movies_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
-import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
-import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
-import 'auth/forgetpassword/ForgetPasswordPage.dart';
+import 'package:movies/shared/view/widget/my_bloc_observer.dart';
+import 'package:shared_preferences/shared_preferences.dart'
+    show SharedPreferences;
+import 'auth/view/screen/forget_password_page.dart';
+import 'movies/view/screen/update_profile_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();    ///في المينasync لازم تتكتب عشان انت استخدمتAli
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+
+  ///في المينasync لازم تتكتب عشان انت استخدمتAli
   final prefs = await SharedPreferences.getInstance();
-  final bool showOnBoarding = prefs.getBool("onboarding") ?? true;///Ali
+  final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
+
+  ///Ali
 
   runApp(MoviesApp(showOnBoarding: showOnBoarding));
 }
 
 class MoviesApp extends StatelessWidget {
-  MoviesApp({super.key, required this.showOnBoarding});///Ali
+  const MoviesApp({super.key, required this.showOnBoarding});
   final bool showOnBoarding;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_)=> MoviesBloc()..loadMovies(),
+      create: (_) => AuthBloc(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute:showOnBoarding ? OnBoarding.routeName : HomeScreen.routName, ///Ali
+        initialRoute: showOnBoarding
+            ? OnBoarding.routeName
+            : LoginScreen.routName,
         routes: {
           HomeScreen.routName: (_) => HomeScreen(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
-          UpdateProfileScreen.routeName: (_) => UpdateProfileScreen(),
+          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
           ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
-          LoginScreen.routeName: (_) => ForgetPasswordPage(),
+          LoginScreen.routName: (_) => LoginScreen(),
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
@@ -44,4 +53,32 @@ class MoviesApp extends StatelessWidget {
     );
   }
 }
+  ///Ali
+  late final bool showOnBoarding;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => AuthBloc(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: showOnBoarding
+            ? OnBoarding.routeName
+            : LoginScreen.routName,
+
+        ///Ali
+        routes: {
+          HomeScreen.routName: (_) => HomeScreen(),
+          RegisterScreen.routName: (_) => RegisterScreen(),
+          OnBoarding.routeName: (_) => OnBoarding(),
+          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
+          ForgetPasswordPage.routName: (_) => ForgetPasswordPage(),
+          LoginScreen.routName: (_) => LoginScreen(),
+        },
+        theme: AppTheme.lightTheme,
+        darkTheme: AppTheme.darkTheme,
+        themeMode: ThemeMode.dark,
+      ),
+    );
+  }
 

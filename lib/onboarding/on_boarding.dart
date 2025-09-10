@@ -89,12 +89,15 @@ class _OnBoardingState extends State<OnBoarding> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.black,
-      body: PageView.builder(
-        controller: pageController,
-        itemCount: onBoardingPage.length,
-        itemBuilder: (context, index) {
-          return onBoardingPage[index];
-        },
+      body: SafeArea(
+        top: false,
+        child: PageView.builder(
+          controller: pageController,
+          itemCount: onBoardingPage.length,
+          itemBuilder: (context, index) {
+            return onBoardingPage[index];
+          },
+        ),
       ),
     );
   }

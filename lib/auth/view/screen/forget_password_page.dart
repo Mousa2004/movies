@@ -5,8 +5,7 @@ import 'package:movies/shared/view/widget/text_field.dart';
 import 'package:movies/shared/view/widget/validation_message.dart';
 
 class ForgetPasswordPage extends StatefulWidget {
-  static const String routName = "/ForgetPasswordPage";
-
+  static const String routName = "/forgetpassword";
   const ForgetPasswordPage({super.key});
 
   @override
@@ -14,9 +13,8 @@ class ForgetPasswordPage extends StatefulWidget {
 }
 
 class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
-  final TextEditingController emailController = TextEditingController();
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
+  TextEditingController emailController = TextEditingController();
+  GlobalKey<FormState> formState = GlobalKey();
   @override
   void dispose() {
     emailController.dispose();
@@ -26,42 +24,39 @@ class _ForgetPasswordPageState extends State<ForgetPasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text("Forget Password"),
-        backgroundColor: Colors.black,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            children: [
-              CustomTextField(
-                controller: emailController,
-                label: "Email",
+      appBar: AppBar(title: Text("Forget Password")),
+      body: Column(
+        children: [
+          Image.asset(
+            "assets/images/Forgot_password-bro 1.png",
+            width: double.infinity,
+            height: MediaQuery.sizeOf(context).height * 0.4,
+
+            fit: BoxFit.fill,
+          ),
+          Form(
+            key: formState,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: CustomTextField(
                 keyboardType: TextInputType.emailAddress,
+                label: "Email",
+                controller: emailController,
                 prefixImage: "email",
-                validator: (val) =>
-                    validationMessage(val!, 50, 10, "email"),
-              ),
-              const SizedBox(height: 30),
-              CustomedButton(
-                text: "Reset Password",
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    // TODO: Connect with backend API
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Password reset link sent!"),
-                      ),
-                    );
-                  }
+                validator: (val) {
+                  return validationMessage(val!, 50, 10, "email");
                 },
               ),
-            ],
+            ),
           ),
-        ),
+          const SizedBox(height: 24),
+          CustomedButton(
+            text: "Verify Email",
+            fontSize: 20,
+            colorText: AppTheme.black,
+            onPressed: () {},
+          ),
+        ],
       ),
     );
   }

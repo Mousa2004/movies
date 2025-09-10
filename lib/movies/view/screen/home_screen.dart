@@ -1,14 +1,203 @@
+//
+//
+// import 'package:flutter/material.dart';
+// import 'package:movies/movies/view/screen/home_tab.dart';
+//
+// import 'screen/search_screen.dart';
+// class HomeScreen extends StatefulWidget {
+//   static const String routName = '/home';
+//
+//   const HomeScreen({super.key});
+//
+//   @override
+//   State<HomeScreen> createState() => _HomeScreenState();
+// }
+//
+// class _HomeScreenState extends State<HomeScreen> {
+//   int _currentIndex = 0;
+//
+//   final List<Widget> _tabs = [
+//     HomeTab(),
+//     SearchScreen(),
+//     const _BrowseTab(),
+//     _ProfileTab(),
+//   ];
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: _tabs[_currentIndex],
+//       bottomNavigationBar: BottomNavigationBar(
+//         currentIndex: _currentIndex,
+//         onTap: (i) => setState(() => _currentIndex = i),
+//         type: BottomNavigationBarType.fixed,
+//         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+//         selectedItemColor: Colors.amber,
+//         unselectedItemColor: Colors.grey.shade400,
+//         showSelectedLabels: false,
+//         showUnselectedLabels: false,
+//         items: const [
+//           BottomNavigationBarItem(
+//             icon: ImageIcon(AssetImage("assets/images/home_icon.png")),
+//             activeIcon: ImageIcon(
+//               AssetImage("assets/images/home_selected_icon.png"),
+//             ),
+//             label: '',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: ImageIcon(AssetImage("assets/images/search_icon.png")),
+//             activeIcon: ImageIcon(
+//               AssetImage("assets/images/search_selected_icon.png"),
+//             ),
+//             label: '',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: ImageIcon(AssetImage("assets/images/explore_icon.png")),
+//             activeIcon: ImageIcon(
+//               AssetImage("assets/images/explore_selected_icon.png"),
+//             ),
+//             label: '',
+//           ),
+//           BottomNavigationBarItem(
+//             icon: ImageIcon(AssetImage("assets/images/profile_icon.png")),
+//             activeIcon: ImageIcon(
+//               AssetImage("assets/images/profile_selected_icon.png"),
+//             ),
+//             label: '',
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+//
+// class _BrowseTab extends StatelessWidget {
+//   const _BrowseTab();
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return const SafeArea(child: MovieGridWithCategories());
+//   }
+// }
+//
+// class MovieGridWithCategories extends StatefulWidget {
+//   const MovieGridWithCategories({super.key});
+//
+//   @override
+//   _MovieGridWithCategoriesState createState() =>
+//       _MovieGridWithCategoriesState();
+// }
+//
+// class _MovieGridWithCategoriesState extends State<MovieGridWithCategories> {
+//   final List<String> categories = [
+//     'All',
+//     'Action',
+//     'Comedy',
+//     'Drama',
+//     'Horror',
+//     'Sci-Fi'
+//   ];
+//   }
 import 'package:flutter/material.dart';
-import 'package:movies/movies/view/home_tab.dart';
+import 'package:movies/movies/view/screen/home_tab.dart';
+import 'package:movies/movies/view/screen/search_screen.dart' show SearchScreen;
 
-class HomeScreen extends StatelessWidget {
-  static const String routName = "/homeScreen";
+class HomeScreen extends StatefulWidget {
+  static const String routName = '/home';
+
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+
+  final List<Widget> _tabs = [
+    HomeTab(),
+    SearchScreen(),
+    _GalleryTab(),
+    _ProfileTab(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: HomeTab(),
+      body: _tabs[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (i) => setState(() => _currentIndex = i),
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        selectedItemColor: Colors.amber,
+        unselectedItemColor: Colors.grey.shade400,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        items: const [
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage("assets/images/home_icon.png")),
+            activeIcon: ImageIcon(
+              AssetImage("assets/images/home_selected_icon.png"),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage("assets/images/search_icon.png")),
+            activeIcon: ImageIcon(
+              AssetImage("assets/images/search_selected_icon.png"),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage("assets/images/explore_icon.png")),
+            activeIcon: ImageIcon(
+              AssetImage("assets/images/explore_selected_icon.png"),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: ImageIcon(AssetImage("assets/images/profile_icon.png")),
+            activeIcon: ImageIcon(
+              AssetImage("assets/images/profile_selected_icon.png"),
+            ),
+            label: '',
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _BrowseTab extends StatelessWidget {
+  const _BrowseTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Center(child: Text('Browse', style: TextStyle(fontSize: 22))),
+    );
+  }
+}
+
+class _GalleryTab extends StatelessWidget {
+  const _GalleryTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Center(child: Text('Gallery', style: TextStyle(fontSize: 22))),
+    );
+  }
+}
+
+class _ProfileTab extends StatelessWidget {
+  const _ProfileTab();
+
+  @override
+  Widget build(BuildContext context) {
+    return const SafeArea(
+      child: Center(child: Text('Profile', style: TextStyle(fontSize: 22))),
     );
   }
 }
