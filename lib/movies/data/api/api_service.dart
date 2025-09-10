@@ -1,34 +1,35 @@
 import 'dart:convert';
-import 'package:http/http.dart' as http show get;
-import 'package:movies/movies/data/api/api_constant.dart';
+import 'package:http/http.dart' as http;
 import 'package:movies/movies/data/models/MovieModel.dart';
 
 class APIService {
+  static const String baseUrl = "https://yts.mx/api/v2";
+
+  /// 📌 الأفلام الأحدث
   static Future<List<MovieModel>> getMovies() async {
-    Uri uri = Uri.https(APIConstance.baseURL, APIConstance.listEndpoint);
-    final response = await http.get(uri);
+    final response = await http.get(Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"));
 
     if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final List movies = json["data"]["movies"];
+      final data = json.decode(response.body);
+      final List movies = data['data']['movies'] ?? [];
       return movies.map((m) => MovieModel.fromJson(m)).toList();
     } else {
-      throw Exception("Failed to load movies");
+      throw Exception("Failed to load latest movies");
     }
   }
 
+  /// 📌 الأفلام حسب التصنيف (genre)
   static Future<List<MovieModel>> getMoviesByGenre(String genre) async {
-    Uri uri = Uri.https(APIConstance.baseURL, APIConstance.listEndpoint, {
-      "genre": genre,
-    });
-    final response = await http.get(uri);
+    final response = await http.get(
+      Uri.parse("$baseUrl/list_movies.json?genre=$genre&sort_by=year"),
+    );
 
     if (response.statusCode == 200) {
-      final json = jsonDecode(response.body);
-      final List movies = json["data"]["movies"];
+      final data = json.decode(response.body);
+      final List movies = data['data']['movies'] ?? [];
       return movies.map((m) => MovieModel.fromJson(m)).toList();
     } else {
-      throw Exception("Failed to load movies by genre");
+      throw Exception("Failed to load movies for genre $genre");
     }
   }
 }

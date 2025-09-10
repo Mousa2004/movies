@@ -41,8 +41,6 @@ class MoviesBloc extends Cubit<MoviesState> {
       emit(MoviesLoading());
 
       final latest = await APIService.getMovies();
-
-
       final category = categories[currentCategoryIndex];
       final categoryMovies = await APIService.getMoviesByGenre(category);
 
@@ -51,14 +49,36 @@ class MoviesBloc extends Cubit<MoviesState> {
         latestMovies: latest,
         categoryMovies: categoryMovies,
         currentCategory: category,
+          currentCategoryIndex: currentCategoryIndex
       ));
 
-
       currentCategoryIndex =
-          (currentCategoryIndex + 1) % categories.length; // يلف بينهم
+          (currentCategoryIndex + 1) % categories.length;
 
     } catch (e) {
       emit(MoviesError("Failed to load movies: $e"));
+    }
+  }
+  Future<void> changeCategory(int index) async {
+    try {
+      emit(MoviesLoading());
+
+      currentCategoryIndex = index;
+      final category = categories[index];
+      final categoryMovies = await APIService.getMoviesByGenre(category);
+
+
+      final latest = await APIService.getMovies();
+
+      emit(MoviesLoaded(
+        latestMovies: latest,
+        categoryMovies: categoryMovies,
+        currentCategory: category,
+          currentCategoryIndex: currentCategoryIndex
+
+      ));
+    } catch (e) {
+      emit(MoviesError("Failed to change category: $e"));
     }
   }
 }

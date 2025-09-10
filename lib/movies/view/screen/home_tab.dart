@@ -6,9 +6,11 @@ import '../../data/bloc/movies_bloc.dart';
 import '../widget/LoadingIndicator.dart';
 import '../widget/movie_card.dart';
 
-
 class HomeTab extends StatelessWidget {
   HomeTab({super.key});
+
+  final PageController latestPageController = PageController(viewportFraction: 0.5);
+  final PageController categoryPageController = PageController(viewportFraction: 0.5);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,7 @@ class HomeTab extends StatelessWidget {
     return Stack(
       alignment: Alignment.center,
       children: [
+        // الخلفية
         Image.asset(
           "assets/images/onBoarding6.png",
           height: height,
@@ -34,6 +37,7 @@ class HomeTab extends StatelessWidget {
                 return Column(
                   children: [
                     SizedBox(height: 14),
+                    // عنوان Available Now
                     Image.asset(
                       "assets/images/AvailableNow.png",
                       height: height * 0.1,
@@ -44,7 +48,7 @@ class HomeTab extends StatelessWidget {
                     SizedBox(
                       height: height * 0.38,
                       child: PageView.builder(
-                        controller: PageController(viewportFraction: 0.5),
+                        controller: latestPageController,
                         itemCount: state.latestMovies.length,
                         itemBuilder: (context, index) {
                           return Container(
@@ -59,6 +63,7 @@ class HomeTab extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 8),
+
                     Image.asset(
                       "assets/images/WatchNow.png",
                       height: height * 0.1,
@@ -66,6 +71,7 @@ class HomeTab extends StatelessWidget {
                       fit: BoxFit.fill,
                     ),
                     SizedBox(height: 8),
+
                     Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(
@@ -84,8 +90,7 @@ class HomeTab extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 2),
-                          Icon(Icons.arrow_forward,
-                              color: AppTheme.yellow, size: 20),
+                          Icon(Icons.arrow_forward, color: AppTheme.yellow, size: 20),
                         ],
                       ),
                     ),
@@ -93,16 +98,18 @@ class HomeTab extends StatelessWidget {
                     SizedBox(
                       height: height * 0.38,
                       child: PageView.builder(
-                        controller: PageController(viewportFraction: 0.5),
+                        controller: categoryPageController,
                         itemCount: state.categoryMovies.length,
                         itemBuilder: (context, index) {
                           return Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8),
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(16)),
                             ),
-                            child: MovieCard(movie: state.categoryMovies[index]),
+                            child:
+                            MovieCard(movie: state.categoryMovies[index]),
                           );
                         },
                       ),
@@ -112,7 +119,7 @@ class HomeTab extends StatelessWidget {
               } else if (state is MoviesError) {
                 return Center(child: Text(state.message));
               } else {
-                return Center(child: Text("Something went wrong"));
+                return const Center(child: Text("Something went wrong"));
               }
             },
           ),

@@ -15,15 +15,18 @@ class MoviesLoaded extends MoviesState {
   final List<MovieModel> latestMovies;
   final List<MovieModel> categoryMovies;
   final String currentCategory;
+  final int currentCategoryIndex;
 
   MoviesLoaded({
     required this.latestMovies,
     required this.categoryMovies,
     required this.currentCategory,
+    required this.currentCategoryIndex
   });
 
   @override
-  List<Object?> get props => [latestMovies, categoryMovies, currentCategory];
+  List<Object?> get props =>
+      [latestMovies, categoryMovies, currentCategory, currentCategoryIndex];
 }
 
 class MoviesError extends MoviesState {
