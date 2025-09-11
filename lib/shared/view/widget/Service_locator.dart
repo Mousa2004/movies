@@ -1,3 +1,4 @@
+import 'package:movies/auth/data/data_sources/remote/google_signin_datasource.dart';
 import 'package:movies/auth/data/data_sources/remote/login_api_data_sources.dart';
 import 'package:movies/auth/data/data_sources/remote/register_api_data_sources.dart';
 import 'package:movies/home/data/data_sources/reset_password_api_data_sources.dart';
@@ -17,4 +18,6 @@ class ServiceLocator {
 
   static ResetPasswordApiDataSources resetPasswordApiDataSources =
       ResetPasswordApiDataSources();
+  static GoogleSigninDatasource googleSigninDatasource =
+      GoogleSigninDatasource();
 }

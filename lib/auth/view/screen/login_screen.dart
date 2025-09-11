@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_bloc.dart';
 import 'package:movies/auth/cubit/auth_state.dart';
-import 'package:movies/auth/data/data_sources/remote/google_signin_datasource.dart';
 import 'package:movies/auth/data/models/login_request.dart';
 import 'package:movies/auth/view/screen/forget_password_page.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
@@ -177,15 +176,31 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               // Google Login Button
-              CustomedButton(
-                text: "Login With Google",
-                onPressed: () {
-                  GoogleSigninDatasource.signInWithGoogle();
-                  Navigator.of(
-                    context,
-                  ).pushReplacementNamed(HomeScreen.routName);
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is GoogleSignInError) {
+                    DialogMessage.showErrorMessage(state.message);
+                  } else if (state is GoogleSignInSuccess) {
+                    DialogMessage.showSuccessMessage();
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(HomeScreen.routName);
+                  }
                 },
-                imageName: "google",
+                builder: (context, state) {
+                  if (state is GoogleSignInLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: AppTheme.yellow),
+                    );
+                  }
+                  return CustomedButton(
+                    text: "Login With Google",
+                    onPressed: () async {
+                      await context.read<AuthBloc>().signInWithGoogle();
+                    },
+                    imageName: "google",
+                  );
+                },
               ),
               const SizedBox(height: 28),
 
