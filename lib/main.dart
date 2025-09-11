@@ -1,7 +1,8 @@
-// main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/auth/cubit/auth_bloc.dart';
+import 'package:movies/auth/data/data_sources/local/auth_local_data_sources.dart';
+import 'package:movies/auth/data/data_sources/local/auth_sharedprefrences_data_sources.dart';
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/movies/data/bloc/movies_bloc.dart';
@@ -28,6 +29,7 @@ class MoviesApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthLocalDataSources checkLogin = AuthSharedprefrencesDataSources();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => MoviesBloc()..loadMovies()),
@@ -39,7 +41,10 @@ class MoviesApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
-            : LoginScreen.routName,
+            // ignore: unnecessary_null_comparison
+            : (checkLogin.getToken() != null
+                  ? HomeScreen.routName
+                  : LoginScreen.routName),
         routes: {
           HomeScreen.routName: (_) => const HomeScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
