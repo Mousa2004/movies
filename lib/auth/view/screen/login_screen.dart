@@ -7,7 +7,6 @@ import 'package:movies/auth/view/screen/forget_password_page.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
-import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/dialog_message.dart';
@@ -177,10 +176,31 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 20),
 
               // Google Login Button
-              CustomedButton(
-                text: "Login With Google",
-                onPressed: () {},
-                imageName: "google",
+              BlocConsumer<AuthBloc, AuthState>(
+                listener: (context, state) {
+                  if (state is GoogleSignInError) {
+                    DialogMessage.showErrorMessage(state.message);
+                  } else if (state is GoogleSignInSuccess) {
+                    DialogMessage.showSuccessMessage();
+                    Navigator.of(
+                      context,
+                    ).pushReplacementNamed(HomeScreen.routName);
+                  }
+                },
+                builder: (context, state) {
+                  if (state is GoogleSignInLoading) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: AppTheme.yellow),
+                    );
+                  }
+                  return CustomedButton(
+                    text: "Login With Google",
+                    onPressed: () async {
+                      await context.read<AuthBloc>().signInWithGoogle();
+                    },
+                    imageName: "google",
+                  );
+                },
               ),
               const SizedBox(height: 28),
 

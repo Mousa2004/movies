@@ -19,3 +19,12 @@ class LoginError extends AuthState {
   final String message;
   LoginError({required this.message});
 }
+
+class GoogleSignInLoading extends AuthState {}
+
+class GoogleSignInSuccess extends AuthState {}
+
+class GoogleSignInError extends AuthState {
+  final String message;
+  GoogleSignInError({required this.message});
+}

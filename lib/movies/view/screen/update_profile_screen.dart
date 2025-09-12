@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/auth/data/data_sources/image_list_data_sources.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/cubit/delete_profile_bloc.dart';
@@ -33,6 +35,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   TextEditingController newPasswordController = TextEditingController();
 
   GlobalKey<FormState> formState = GlobalKey<FormState>();
+
+  GoogleSignIn _googleSignIn = GoogleSignIn();
 
   int selectedAvatar = 1;
 
@@ -217,10 +221,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           colorText: AppTheme.white,
                           onPressed: state is DeleteProfileLoading
                               ? null
-                              : () {
+                              : () async {
                                   context
                                       .read<DeleteProfileBloc>()
                                       .deleteProfile();
+                                  _googleSignIn.disconnect();
+                                  await FirebaseAuth.instance.signOut();
                                 },
                         );
                       },
