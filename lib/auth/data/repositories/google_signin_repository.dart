@@ -9,10 +9,16 @@ AuthLocalDataSources localDataSources = AuthSharedprefrencesDataSources();
 class GoogleSigninRepository {
   final GoogleSigninDatasource googleSigninDatasource;
   GoogleSigninRepository(this.googleSigninDatasource);
+
   Future<UserCredential?> signInWithGoogle() async {
     try {
       final response = await googleSigninDatasource.signInWithGoogle();
-      await localDataSources.saveToken(response.user?.uid ?? "");
+
+      if (response != null) {
+        final idToken = await response.user?.getIdToken();
+        await localDataSources.saveToken(idToken ?? "");
+      }
+
       return response;
     } catch (exception) {
       throw RepositoryException(message: exception.toString());
