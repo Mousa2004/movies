@@ -19,17 +19,23 @@ void main() async {
 
   final prefs = await SharedPreferences.getInstance();
   final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
+  AuthLocalDataSources checkLogin = AuthSharedprefrencesDataSources();
+  final token = await checkLogin.getToken();
 
-  runApp(MoviesApp(showOnBoarding: showOnBoarding));
+  runApp(MoviesApp(showOnBoarding: showOnBoarding, token: token));
 }
 
 class MoviesApp extends StatelessWidget {
   final bool showOnBoarding;
-  const MoviesApp({super.key, required this.showOnBoarding});
+  final String token;
+  const MoviesApp({
+    super.key,
+    required this.showOnBoarding,
+    required this.token,
+  });
 
   @override
   Widget build(BuildContext context) {
-    AuthLocalDataSources checkLogin = AuthSharedprefrencesDataSources();
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => MoviesBloc()..loadMovies()),
@@ -41,10 +47,7 @@ class MoviesApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
-            // ignore: unnecessary_null_comparison
-            : (checkLogin.getToken() != null
-                  ? HomeScreen.routName
-                  : LoginScreen.routName),
+            : (token.isNotEmpty ? HomeScreen.routName : LoginScreen.routName),
         routes: {
           HomeScreen.routName: (_) => const HomeScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),

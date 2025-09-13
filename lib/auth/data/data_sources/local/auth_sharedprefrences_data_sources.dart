@@ -7,7 +7,7 @@ class AuthSharedprefrencesDataSources implements AuthLocalDataSources {
   Future<String> getToken() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    return sharedPreferences.getString(CacheConstant.tokenKey)!;
+    return sharedPreferences.getString(CacheConstant.tokenKey) ?? "";
   }
 
   @override
