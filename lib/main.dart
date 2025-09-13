@@ -7,6 +7,7 @@ import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/movies/data/bloc/movies_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
+import 'package:movies/movies/view/screen/movie_detials.dart';
 import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -49,6 +50,7 @@ class MoviesApp extends StatelessWidget {
           HomeScreen.routName: (_) => const HomeScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
           LoginScreen.routName: (_) => LoginScreen(),
+          MovieDetials.routeName:(_) =>MovieDetials(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
         },
