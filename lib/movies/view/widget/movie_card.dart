@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/movies/data/models/MovieModel.dart';
-import 'package:movies/movies/view/screen/movie_detials.dart';
+import 'package:movies/movies/view/screen/movie_details.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
 class MovieCard extends StatelessWidget {
@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget {
     TextTheme textTitle = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetials.routeName);
+        Navigator.pushNamed(context, MovieDetails.routeName,arguments: movie,);
       },
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),

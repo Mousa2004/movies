@@ -7,12 +7,13 @@ import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/movies/data/bloc/movies_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
-import 'package:movies/movies/view/screen/movie_detials.dart';
+import 'package:movies/movies/view/screen/movie_details.dart';
 import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'shared/view/widget/app_theme.dart';
+import 'package:movies/movies/data/models/MovieModel.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,24 +36,31 @@ class MoviesApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => MoviesBloc()..loadMovies()),
         BlocProvider(
-          create: (_) => AuthBloc(), // << هنا AuthBloc
+          create: (_) => AuthBloc(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
-            // ignore: unnecessary_null_comparison
             : (checkLogin.getToken() != null
-                  ? HomeScreen.routName
-                  : LoginScreen.routName),
+            ? HomeScreen.routName
+            : LoginScreen.routName),
         routes: {
           HomeScreen.routName: (_) => const HomeScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
           LoginScreen.routName: (_) => LoginScreen(),
-          MovieDetials.routeName:(_) =>MovieDetials(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == MovieDetails.routeName) {
+            final movie = settings.arguments as MovieModel;
+            return MaterialPageRoute(
+              builder: (_) => MovieDetails(movie: movie),
+            );
+          }
+          return null;
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
