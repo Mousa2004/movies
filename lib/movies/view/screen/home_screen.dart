@@ -3,7 +3,6 @@ import 'package:movies/movies/view/screen/browse_tab.dart';
 import 'package:movies/movies/view/screen/home_tab.dart';
 import 'package:movies/movies/view/screen/profile_tab.dart' show ProfileTab;
 import 'package:movies/movies/view/screen/search_screen.dart';
-// ✅ استيراد MovieItem (عشان يبقى متاح جوه HomeTab وغيره)
 
 class HomeScreen extends StatefulWidget {
   static const String routName = '/home';

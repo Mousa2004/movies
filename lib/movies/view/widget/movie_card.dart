@@ -23,7 +23,16 @@ class MovieCard extends StatelessWidget {
         width: width * 0.5,
         child: Stack(
           children: [
-            Image.network(movie.largeCoverImage!, fit: BoxFit.fill),
+            Image.network(
+              movie.largeCoverImage ?? "",
+              fit: BoxFit.fill,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  "assets/images/no_image.png",
+                  fit: BoxFit.fill,
+                );
+              },
+            ),
 
             ///change image by api
             Container(

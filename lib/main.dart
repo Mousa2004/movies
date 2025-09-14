@@ -6,7 +6,7 @@ import 'package:movies/auth/data/data_sources/local/auth_sharedprefrences_data_s
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/movies/bloc/movies_bloc.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/movies/view/screen/movie_details.dart';
 import 'package:movies/movies/view/screen/movie_detials.dart';
@@ -58,7 +58,7 @@ class MoviesApp extends StatelessWidget {
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
         },
         onGenerateRoute: (settings) {
-          if (settings.name == MovieDetails.routeName) {
+          if (settings.name == MovieDetails.routName) {
             final movie = settings.arguments as MovieModel;
             return MaterialPageRoute(
               builder: (_) => MovieDetails(movie: movie),
