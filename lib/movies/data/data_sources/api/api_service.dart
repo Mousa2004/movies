@@ -1,13 +1,15 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:movies/movies/data/models/MovieModel.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
 
 class APIService {
   static const String baseUrl = "https://yts.mx/api/v2";
 
   /// 📌 الأفلام الأحدث
   static Future<List<MovieModel>> getMovies() async {
-    final response = await http.get(Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"));
+    final response = await http.get(
+      Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"),
+    );
 
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
