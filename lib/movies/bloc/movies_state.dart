@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
-
+import 'package:movies/movies/data/models/movie_model.dart';
 
 abstract class MoviesState extends Equatable {
   @override
@@ -21,12 +20,16 @@ class MoviesLoaded extends MoviesState {
     required this.latestMovies,
     required this.categoryMovies,
     required this.currentCategory,
-    required this.currentCategoryIndex
+    required this.currentCategoryIndex,
   });
 
   @override
-  List<Object?> get props =>
-      [latestMovies, categoryMovies, currentCategory, currentCategoryIndex];
+  List<Object?> get props => [
+    latestMovies,
+    categoryMovies,
+    currentCategory,
+    currentCategoryIndex,
+  ];
 }
 
 class MoviesError extends MoviesState {

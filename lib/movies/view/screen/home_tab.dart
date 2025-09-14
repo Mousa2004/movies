@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/movies/data/bloc/movies_state.dart';
+import 'package:movies/movies/bloc/movies_state.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
-import '../../data/bloc/movies_bloc.dart';
+import '../../bloc/movies_bloc.dart';
 import '../widget/LoadingIndicator.dart';
 import '../widget/movie_card.dart';
 
 class HomeTab extends StatelessWidget {
   HomeTab({super.key});
 
-  final PageController latestPageController = PageController(viewportFraction: 0.5);
-  final PageController categoryPageController = PageController(viewportFraction: 0.5);
+  final PageController latestPageController = PageController(
+    viewportFraction: 0.5,
+  );
+  final PageController categoryPageController = PageController(
+    viewportFraction: 0.5,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +59,9 @@ class HomeTab extends StatelessWidget {
                             margin: EdgeInsets.symmetric(horizontal: 8),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
                             ),
                             child: MovieCard(movie: state.latestMovies[index]),
                           );
@@ -90,7 +96,11 @@ class HomeTab extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 2),
-                          Icon(Icons.arrow_forward, color: AppTheme.yellow, size: 20),
+                          Icon(
+                            Icons.arrow_forward,
+                            color: AppTheme.yellow,
+                            size: 20,
+                          ),
                         ],
                       ),
                     ),
@@ -105,11 +115,13 @@ class HomeTab extends StatelessWidget {
                             margin: const EdgeInsets.symmetric(horizontal: 8),
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             decoration: const BoxDecoration(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(16)),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(16),
+                              ),
                             ),
-                            child:
-                            MovieCard(movie: state.categoryMovies[index]),
+                            child: MovieCard(
+                              movie: state.categoryMovies[index],
+                            ),
                           );
                         },
                       ),
