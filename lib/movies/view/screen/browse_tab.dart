@@ -106,12 +106,17 @@ class MovieGrid extends StatelessWidget {
       'rating': '7.7',
     },
     {'title': 'Joker', 'image': 'assets/images/jokar.png', 'rating': '7.7'},
-    {'title': 'Iron Man 3', 'image': 'assets/images/iron man.png', 'rating': '7.7'},
+    {
+      'title': 'Iron Man 3',
+      'image': 'assets/images/iron man.png',
+      'rating': '7.7',
+    },
     {
       'title': 'Captain America: Civil War',
       'image': 'assets/images/captain.png',
       'rating': '7.7',
-    },   {
+    },
+    {
       'title': 'doctor stareng: doctor stareng',
       'image': 'assets/images/doctor stareng.jpg',
       'rating': '7.7',

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class ProfileTab extends StatelessWidget {
-   ProfileTab();
+  ProfileTab();
 
   @override
   Widget build(BuildContext context) {
@@ -158,12 +158,12 @@ class _ProfileScreenState extends State<ProfileScreen>
                   GridView.builder(
                     padding: const EdgeInsets.all(8),
                     gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 0.6,
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                    ),
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 0.6,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
                     itemCount: 12,
                     itemBuilder: (context, index) {
                       return Stack(
