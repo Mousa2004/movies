@@ -65,6 +65,7 @@ class MoviesApp extends StatelessWidget {
           }
           return null;
         },
+
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.dark,
