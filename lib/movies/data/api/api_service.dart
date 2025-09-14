@@ -5,7 +5,7 @@ import 'package:movies/movies/data/models/MovieModel.dart';
 class APIService {
   static const String baseUrl = "https://yts.mx/api/v2";
 
-  /// 📌 الأفلام الأحدث
+
   static Future<List<MovieModel>> getMovies() async {
     final response = await http.get(Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"));
 
@@ -18,7 +18,6 @@ class APIService {
     }
   }
 
-  /// 📌 الأفلام حسب التصنيف (genre)
   static Future<List<MovieModel>> getMoviesByGenre(String genre) async {
     final response = await http.get(
       Uri.parse("$baseUrl/list_movies.json?genre=$genre&sort_by=year"),
