@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/screen/movie_details.dart';
 
 class MovieItem extends StatelessWidget {
@@ -11,18 +11,14 @@ class MovieItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          MovieDetails.routeName,
-          arguments: movie, // ✅ بنبعت الفيلم كله
-        );
+        Navigator.pushNamed(context, MovieDetails.routName, arguments: movie);
       },
       child: Column(
         children: [
-          Image.network(movie.image, fit: BoxFit.cover, height: 150),
+          Image.network(movie.largeCoverImage!, fit: BoxFit.cover, height: 150),
           const SizedBox(height: 6),
           Text(
-            movie.title,
+            movie.title!,
             style: const TextStyle(color: Colors.white, fontSize: 14),
             overflow: TextOverflow.ellipsis,
           ),

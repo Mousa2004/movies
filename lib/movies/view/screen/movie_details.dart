@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
+import 'package:movies/movies/view/widget/customed_watch.dart';
 
 class MovieDetails extends StatelessWidget {
-  static const String routeName = '/movieDetails';
+  static const String routName = '/movieDetails';
   final MovieModel movie;
 
   const MovieDetails({super.key, required this.movie});
@@ -15,9 +16,10 @@ class MovieDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            CustomedWatch(),
             // Poster
             Image.network(
-              movie.largeCoverImage,
+              movie.largeCoverImage!,
               width: double.infinity,
               height: 350,
               fit: BoxFit.cover,
@@ -33,7 +35,7 @@ class MovieDetails extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          movie.title,
+                          movie.title!,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -43,7 +45,11 @@ class MovieDetails extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, color: Colors.yellow, size: 20),
+                          const Icon(
+                            Icons.star,
+                            color: Colors.yellow,
+                            size: 20,
+                          ),
                           const SizedBox(width: 4),
                           Text(
                             movie.rating.toString(),
@@ -57,7 +63,7 @@ class MovieDetails extends StatelessWidget {
 
                   // Genres
                   Wrap(
-                    children: movie.genres
+                    children: movie.genres!
                         .map((g) => GenreChip(genre: g))
                         .toList(),
                   ),
@@ -66,11 +72,8 @@ class MovieDetails extends StatelessWidget {
 
                   // Overview
                   Text(
-                    movie.descriptionFull,
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 16,
-                    ),
+                    movie.descriptionFull!,
+                    style: const TextStyle(color: Colors.white70, fontSize: 16),
                   ),
                 ],
               ),

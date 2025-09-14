@@ -5,11 +5,11 @@ import 'package:movies/auth/data/data_sources/local/auth_local_data_sources.dart
 import 'package:movies/auth/data/data_sources/local/auth_sharedprefrences_data_sources.dart';
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
-
-import 'package:movies/movies/data/bloc/movies_bloc.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
+import 'package:movies/movies/bloc/movies_bloc.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/movies/view/screen/movie_details.dart';
+import 'package:movies/movies/view/screen/movie_detials.dart';
 import 'package:movies/movies/view/screen/update_profile_screen.dart';
 
 import 'package:movies/onboarding/on_boarding.dart';
@@ -53,11 +53,12 @@ class MoviesApp extends StatelessWidget {
           HomeScreen.routName: (_) => const HomeScreen(),
           OnBoarding.routeName: (_) => OnBoarding(),
           LoginScreen.routName: (_) => LoginScreen(),
+          MovieDetials.routeName: (_) => MovieDetials(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
         },
         onGenerateRoute: (settings) {
-          if (settings.name == MovieDetails.routeName) {
+          if (settings.name == MovieDetails.routName) {
             final movie = settings.arguments as MovieModel;
             return MaterialPageRoute(
               builder: (_) => MovieDetails(movie: movie),

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:movies/movies/data/models/MovieModel.dart';
-import 'package:movies/movies/view/screen/movie_details.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
+import 'package:movies/movies/view/screen/movie_detials.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 
 class MovieCard extends StatelessWidget {
-  MovieModel movie;
+  final MovieModel movie;
 
-  MovieCard({super.key, required this.movie});
+  const MovieCard({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget {
     TextTheme textTitle = Theme.of(context).textTheme;
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, MovieDetails.routeName,arguments: movie,);
+        Navigator.pushNamed(context, MovieDetials.routeName, arguments: movie);
       },
       child: Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(16)),
@@ -23,7 +23,16 @@ class MovieCard extends StatelessWidget {
         width: width * 0.5,
         child: Stack(
           children: [
-            Image.network(movie.image, fit: BoxFit.fill),
+            Image.network(
+              movie.largeCoverImage ?? "",
+              fit: BoxFit.fill,
+              errorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  "assets/images/no_image.png",
+                  fit: BoxFit.fill,
+                );
+              },
+            ),
 
             ///change image by api
             Container(
