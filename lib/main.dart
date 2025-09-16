@@ -57,15 +57,15 @@ class MoviesApp extends StatelessWidget {
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
         },
-        onGenerateRoute: (settings) {
-          if (settings.name == MovieDetails.routName) {
-            final movie = settings.arguments as MovieModel;
-            return MaterialPageRoute(
-              builder: (_) => MovieDetails(movie: movie),
-            );
-          }
-          return null;
-        },
+        // onGenerateRoute: (settings) {
+        //   if (settings.name == MovieDetails.routName) {
+        //     final movie = settings.arguments as MovieModel;
+        //     return MaterialPageRoute(
+        //       builder: (_) => MovieDetails(movie: movie),
+        //     );
+        //   }
+        //   return null;
+        // },
 
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,

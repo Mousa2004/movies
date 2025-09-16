@@ -1,14 +1,71 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/movies/bloc/movie_details_cubit.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
+import 'package:movies/movies/view/widget/LoadingIndicator.dart';
+import 'package:movies/movies/view/widget/custom_details_actors.dart';
 import 'package:movies/movies/view/widget/customed_watch.dart';
+import 'package:movies/movies/view/widget/summary.dart';
 
 class MovieDetials extends StatelessWidget {
-  static const String routeName = '/moviedetials';
-  MovieDetials({super.key});
+  static const String routeName = '/moviedetails';
+
+  const MovieDetials({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(child: Column(children: [CustomedWatch()])),
+    TextTheme textTitle = Theme.of(context).textTheme;
+    final movie = ModalRoute.of(context)!.settings.arguments as MovieModel;
+
+    return BlocProvider(
+      create: (_) => MovieDetailsCubit()..fetchMovieDetails(movie.id!),
+      child: Scaffold(
+        body: BlocBuilder<MovieDetailsCubit, MovieDetailsState>(
+          builder: (context, state) {
+            if (state is MovieDetailsLoading) {
+              return Center(child: LoadingIndicator());
+            } else if (state is MovieDetailsLoaded) {
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    CustomedWatch(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 14),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 8),
+                          Text("Screen Shots", style: textTitle.headlineSmall),
+                          SizedBox(height: 8),
+
+                          SizedBox(height: 8),
+                          Text("Similar ", style: textTitle.headlineSmall),
+                          SizedBox(height: 8),
+
+                          SizedBox(height: 8),
+                          Text("Summary", style: textTitle.headlineSmall),
+                          SizedBox(height: 8),
+                          Summary(),
+                          SizedBox(height: 8),
+                          Text("Cast", style: textTitle.headlineSmall),
+                          SizedBox(height: 8),
+                          CustomDetailsActors(movie: state.movie),
+                          SizedBox(height: 8),
+                          Text("Genres", style: textTitle.headlineSmall),
+                          SizedBox(height: 8),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else if (state is MovieDetailsError) {
+              return Center(child: Text(state.message));
+            }
+            return SizedBox.shrink();
+          },
+        ),
+      ),
     );
   }
 }

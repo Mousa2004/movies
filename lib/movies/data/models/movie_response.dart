@@ -1,7 +1,5 @@
 import 'package:movies/auth/data/models/data.dart';
 
-import 'movie_models/meta.dart';
-
 class MovieResponse {
   String? status;
   String? statusMessage;
