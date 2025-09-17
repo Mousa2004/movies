@@ -45,7 +45,7 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           Text("Summary", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
-                          Summary(),
+                          Summary(movie: state.movie,),
                           SizedBox(height: 8),
                           Text("Cast", style: textTitle.headlineSmall),
                           SizedBox(height: 8),

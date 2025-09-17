@@ -3,7 +3,8 @@ import 'package:movies/movies/data/models/movie_model.dart' show MovieModel;
 import 'package:movies/shared/view/widget/app_theme.dart';
 
 class Summary extends StatelessWidget {
-  const Summary({super.key});
+  final MovieModel movie;
+  const Summary({super.key,required this.movie});
 
   @override
   Widget build(BuildContext context) {
