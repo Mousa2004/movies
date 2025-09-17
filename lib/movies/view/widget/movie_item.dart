@@ -13,7 +13,7 @@ class MovieItem extends StatelessWidget {
             onTap: () {
                 Navigator.pushNamed(
                     context,
-                    MovieDetails.routName,
+                    MovieDetials.routeName,
                     arguments: movie
                 );
             },

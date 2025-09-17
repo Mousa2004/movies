@@ -29,7 +29,7 @@ class MovieDetials extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomedWatch(),
+                    CustomedWatch(movie: movie,),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
