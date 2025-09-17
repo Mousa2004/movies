@@ -1,6 +1,9 @@
+import 'package:movies/movies/data/models/cast_model.dart';
+
 import 'torrent.dart';
 
 class MovieModel {
+
     int? id;
     String? url;
     String? imdbCode;
@@ -27,6 +30,7 @@ class MovieModel {
     List<Torrent>? torrents;
     String? dateUploaded;
     int? dateUploadedUnix;
+    List<CastModel>? cast;
 
     MovieModel({
         this.id,
@@ -54,7 +58,8 @@ class MovieModel {
         this.state,
         this.torrents,
         this.dateUploaded,
-        this.dateUploadedUnix
+        this.dateUploadedUnix,
+          this.cast,
     });
     factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
         id: json['id'] as int?,
@@ -86,7 +91,11 @@ class MovieModel {
             ?.map((e) => Torrent.fromJson(e as Map<String, dynamic>))
             .toList(),
         dateUploaded: json['date_uploaded'] as String?,
-        dateUploadedUnix: json['date_uploaded_unix'] as int?
+        dateUploadedUnix: json['date_uploaded_unix'] as int?,
+        cast: (json['cast'] as List<dynamic>?)
+        ?.map((e) => CastModel.fromJson(e as Map<String, dynamic>))
+        .toList(),
+
     );
 
     Map<String, dynamic> toJson() => {
@@ -115,6 +124,8 @@ class MovieModel {
         'state': state,
         'torrents': torrents?.map((e) => e.toJson()).toList(),
         'date_uploaded': dateUploaded,
-        'date_uploaded_unix': dateUploadedUnix
+        'date_uploaded_unix': dateUploadedUnix,
+          'cast': cast?.map((e) => e.toJson()).toList(),
     };
+
 }

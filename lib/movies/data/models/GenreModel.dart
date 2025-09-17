@@ -7,6 +7,7 @@ class GenreModel {
         required this.name
     });
 
+
     // من JSON → Object
     factory GenreModel.fromJson(Map<String, dynamic> json) {
         return GenreModel(

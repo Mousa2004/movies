@@ -60,22 +60,16 @@ class MoviesApp extends StatelessWidget {
 
                         print("🔎 settings.arguments = $args");
 
-                        if (args != null && args is MovieModel) {
-                            return MaterialPageRoute(
-                                builder: (_) => MovieDetails(movie: args)
-                            );
-                        } else {
-                            return MaterialPageRoute(
-                                builder: (_) => const Scaffold(
-                                    body: Center(
-                                        child: Text("❌ No movie data provided")
-                                    )
-                                )
-                            );
-                        }
-                    }
-                    return null;
-                },
+        routes: {
+          HomeScreen.routName: (_) => const HomeScreen(),
+          OnBoarding.routeName: (_) => OnBoarding(),
+          LoginScreen.routName: (_) => LoginScreen(),
+          MovieDetials.routeName: (_) => MovieDetials(),
+          RegisterScreen.routName: (_) => RegisterScreen(),
+          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
+        },
+    
+
 
                 theme: AppTheme.lightTheme,
                 darkTheme: AppTheme.darkTheme,
