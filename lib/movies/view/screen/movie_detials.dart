@@ -6,6 +6,7 @@ import 'package:movies/movies/view/widget/LoadingIndicator.dart';
 import 'package:movies/movies/view/widget/custom_details_actors.dart';
 import 'package:movies/movies/view/widget/customed_watch.dart';
 import 'package:movies/movies/view/widget/summary.dart';
+import 'package:movies/movies/view/widget/customed_genres.dart';
 
 class MovieDetials extends StatelessWidget {
   static const String routeName = '/moviedetails';
@@ -53,6 +54,14 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           Text("Genres", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
+                         if (movie.genres != null && movie.genres!.isNotEmpty)
+                         Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                            child: SizedBox(
+                                width: double.infinity,
+                                child: CustomedGenres(genres: movie.genres!)
+                            )
+                        )
                         ],
                       ),
                     ),
@@ -68,4 +77,5 @@ class MovieDetials extends StatelessWidget {
       ),
     );
   }
+
 }
