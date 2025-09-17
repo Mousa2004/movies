@@ -7,6 +7,7 @@ import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/movies/bloc/movies_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
+import 'package:movies/movies/view/screen/movie_detials.dart';
 import 'package:movies/movies/view/screen/update_profile_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
@@ -40,6 +41,7 @@ class MoviesApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
+            // ignore: unnecessary_null_comparison
             : (checkLogin.getToken() != null
                   ? HomeScreen.routName
                   : LoginScreen.routName),
@@ -50,6 +52,7 @@ class MoviesApp extends StatelessWidget {
           LoginScreen.routName: (_) => LoginScreen(),
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
+          MovieDetials.routeName: (_) => MovieDetials(),
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
