@@ -5,13 +5,14 @@ import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/widget/LoadingIndicator.dart';
 import 'package:movies/movies/view/widget/custom_details_actors.dart';
 import 'package:movies/movies/view/widget/customed_watch.dart';
+import 'package:movies/movies/view/widget/screen_shots.dart';
 import 'package:movies/movies/view/widget/summary.dart';
 import 'package:movies/movies/view/widget/customed_genres.dart';
 
 class MovieDetials extends StatelessWidget {
   static const String routeName = '/moviedetails';
 
-  const MovieDetials({super.key});
+  MovieDetials({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class MovieDetials extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomedWatch(movie: movie,),
+                    CustomedWatch(movie: movie),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
@@ -38,7 +39,7 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           Text("Screen Shots", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
-
+                          ScreenShots(movie: state.movie),///
                           SizedBox(height: 8),
                           Text("Similar ", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
@@ -46,7 +47,7 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           Text("Summary", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
-                          Summary(movie: state.movie,),
+                          Summary(movie: state.movie),
                           SizedBox(height: 8),
                           Text("Cast", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
@@ -54,14 +55,12 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           Text("Genres", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
-                         if (movie.genres != null && movie.genres!.isNotEmpty)
-                         Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            child: SizedBox(
-                                width: double.infinity,
-                                child: CustomedGenres(genres: movie.genres!)
-                            )
-                        )
+                          if (state.movie.genres != null &&
+                              state.movie.genres!.isNotEmpty)
+                            SizedBox(
+                              width: double.infinity,
+                              child: CustomedGenres(genres: movie.genres!),
+                            ),
                         ],
                       ),
                     ),
@@ -77,5 +76,4 @@ class MovieDetials extends StatelessWidget {
       ),
     );
   }
-
 }
