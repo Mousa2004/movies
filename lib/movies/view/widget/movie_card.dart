@@ -15,10 +15,9 @@ class MovieCard extends StatelessWidget {
         TextTheme textTitle = Theme.of(context).textTheme;
         return InkWell(
             onTap: () {
-                print("🎬 movie before navigation: $movie");
                 Navigator.pushNamed(
                     context,
-                    MovieDetails.routName,
+                    MovieDetials.routeName,
                     arguments: movie
                 );
             },
