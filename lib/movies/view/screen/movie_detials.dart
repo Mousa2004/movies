@@ -8,10 +8,12 @@ import 'package:movies/movies/view/widget/customed_watch.dart';
 import 'package:movies/movies/view/widget/summary.dart';
 import 'package:movies/movies/view/widget/customed_genres.dart';
 
+import '../../../auth/view/screen/SimilarMoviesSection.dart';
+
+
 class MovieDetials extends StatelessWidget {
   static const String routeName = '/moviedetails';
 
-  const MovieDetials({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,9 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
 
                           SizedBox(height: 8),
-                          Text("Similar ", style: textTitle.headlineSmall),
+
+                          SimilarMoviesSection(movieId: movie.id!),
+
                           SizedBox(height: 8),
 
                           SizedBox(height: 8),
@@ -65,6 +69,7 @@ class MovieDetials extends StatelessWidget {
                         ],
                       ),
                     ),
+
                   ],
                 ),
               );
