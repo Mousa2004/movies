@@ -12,4 +12,6 @@ class ApiConst {
 
 class CacheConstant {
   static const String tokenKey = "token";
+  static const String watchListKey = "watchList";
+  static const String historyKey = "history";
 }

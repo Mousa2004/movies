@@ -1,216 +1,137 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/movies/bloc/history_bloc.dart';
+import 'package:movies/movies/bloc/history_state.dart';
+import 'package:movies/movies/bloc/watch_list_state.dart';
+import 'package:movies/movies/bloc/watch_list_bloc.dart';
+import 'package:movies/movies/view/widget/customed_column_profile.dart';
+import 'package:movies/movies/view/widget/customed_tabbar.dart';
+import 'package:movies/shared/view/widget/app_theme.dart';
+import 'package:movies/shared/view/widget/customed_button.dart';
 
 class ProfileTab extends StatelessWidget {
-    ProfileTab();
+  const ProfileTab({super.key});
 
-    @override
-    Widget build(BuildContext context) {
-        return MaterialApp(
-            theme: ThemeData.dark().copyWith(
-                primaryColor: Colors.yellow,
-                scaffoldBackgroundColor: Colors.black
-            ),
-            debugShowCheckedModeBanner: false,
-            home: const ProfileScreen()
-        );
-    }
-}
-
-class ProfileScreen extends StatefulWidget {
-    const ProfileScreen({super.key});
-
-    @override
-    State<ProfileScreen> createState() => _ProfileScreenState();
-}
-
-class _ProfileScreenState extends State<ProfileScreen>
-    with SingleTickerProviderStateMixin {
-    late TabController _tabController;
-
-    @override
-    void initState() {
-        super.initState();
-        _tabController = TabController(length: 2, vsync: this);
-    }
-
-    @override
-    void dispose() {
-        _tabController.dispose();
-        super.dispose();
-    }
-
-    @override
-    Widget build(BuildContext context) {
-        return Scaffold(
-            body: SafeArea(
-                child: Column(
-                    children: [
-                        const SizedBox(height: 20),
-                        // Profile header
-                        Row(
-                            children: [
-                                const SizedBox(width: 16),
-                                const CircleAvatar(
-                                    radius: 35,
-                                    backgroundImage: AssetImage(
-                                        "assets/images/avatar3.png"
-                                    ) // صورة افتراضية
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppTheme.grey,
+      body: SafeArea(
+        child: Container(
+          color: AppTheme.grey,
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.sizeOf(context).height * 0.02),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Image.asset(
+                            "assets/images/avatar3.png",
+                            height: 118,
+                            width: 118,
+                            fit: BoxFit.fill,
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            "Mohamed Ayman",
+                            style: Theme.of(context).textTheme.titleLarge!
+                                .copyWith(
+                                  color: AppTheme.white,
+                                  fontWeight: FontWeight.w700,
                                 ),
-                                const SizedBox(width: 16),
-                                Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: const[
-                                        Text(
-                                            "John Safwat",
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold
-                                            )
-                                        ),
-                                        SizedBox(height: 8),
-                                        Row(
-                                            children: [
-                                                Text(
-                                                    "12 ",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight: FontWeight.bold
-                                                    )
-                                                ),
-                                                Text("Wish List"),
-                                                SizedBox(width: 20),
-                                                Text(
-                                                    "10 ",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        fontWeight: FontWeight.bold
-                                                    )
-                                                ),
-                                                Text("History")
-                                            ]
-                                        )
-                                    ]
-                                ),
-                                const Spacer()
-                            ]
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(width: 15),
+                    Expanded(
+                      child: BlocBuilder<WatchListBloc, WatchListState>(
+                        builder: (context, state) {
+                          int count = 0;
+                          if (state is WatchListSuccess) {
+                            count = state.count;
+                          }
+                          return CustomedColumnProfile(
+                            number: "$count",
+                            text: "Wish List",
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: BlocBuilder<HistoryBloc, HistoryState>(
+                        builder: (context, state) {
+                          int count = 0;
+                          if (state is HistorySuccess) {
+                            count = state.count;
+                          }
+                          return CustomedColumnProfile(
+                            number: "$count",
+                            text: "History",
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: CustomedButton(
+                      text: "Edit Profile",
+                      onPressed: () {},
+                    ),
+                  ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 16),
+                      child: MaterialButton(
+                        color: AppTheme.red,
+                        padding: EdgeInsets.symmetric(vertical: 15),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadiusGeometry.circular(15),
                         ),
-                        const SizedBox(height: 16),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.yellow,
-                                        foregroundColor: Colors.black
-                                    ),
-                                    onPressed: () {
-                                    },
-                                    child: const Text("Edit Profile")
-                                ),
-                                const SizedBox(width: 12),
-                                ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Colors.red,
-                                        foregroundColor: Colors.white
-                                    ),
-                                    onPressed: () {
-                                    },
-                                    child: const Text("Exit")
-                                )
-                            ]
+                        onPressed: () {},
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Exit",
+                              style: Theme.of(context).textTheme.titleLarge!
+                                  .copyWith(color: AppTheme.white),
+                            ),
+                            SizedBox(width: 10),
+                            Icon(
+                              Icons.exit_to_app,
+                              color: AppTheme.white,
+                              size: 20,
+                            ),
+                          ],
                         ),
-                        const SizedBox(height: 20),
-
-                        // Tabs
-                        TabBar(
-                            controller: _tabController,
-                            labelColor: Colors.yellow,
-                            unselectedLabelColor: Colors.white,
-                            indicatorColor: Colors.yellow,
-                            tabs: const[
-                                Tab(icon: Icon(Icons.list), text: "Watch List"),
-                                Tab(icon: Icon(Icons.folder), text: "History")
-                            ]
-                        ),
-
-                        Expanded(
-                            child: TabBarView(
-                                controller: _tabController,
-                                children: [
-                                    // Watch List
-                                    Center(
-                                        child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.center,
-                                            children: const[
-                                                Icon(
-                                                    Icons.local_movies,
-                                                    size: 80,
-                                                    color: Colors.yellow
-                                                ),
-                                                SizedBox(height: 12),
-                                                Text(
-                                                    "No movies in Watch List",
-                                                    style: TextStyle(color: Colors.white70)
-                                                )
-                                            ]
-                                        )
-                                    ),
-
-                                    // History Grid
-                                    GridView.builder(
-                                        padding: const EdgeInsets.all(8),
-                                        gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 3,
-                                            childAspectRatio: 0.6,
-                                            crossAxisSpacing: 8,
-                                            mainAxisSpacing: 8
-                                        ),
-                                        itemCount: 12,
-                                        itemBuilder: (context, index) {
-                                            return Stack(
-                                                children: [
-                                                    ClipRRect(
-                                                        borderRadius: BorderRadius.circular(8),
-                                                        child: Image.asset(
-                                                            "assets/images/avengars.jpg",
-                                                            // صورة موفي افتراضية
-                                                            fit: BoxFit.cover,
-                                                            height: double.infinity,
-                                                            width: double.infinity
-                                                        )
-                                                    ),
-                                                    Positioned(
-                                                        top: 4,
-                                                        left: 4,
-                                                        child: Container(
-                                                            padding: const EdgeInsets.symmetric(
-                                                                horizontal: 4,
-                                                                vertical: 2
-                                                            ),
-                                                            decoration: BoxDecoration(
-                                                                color: Colors.black.withOpacity(0.7),
-                                                                borderRadius: BorderRadius.circular(4)
-                                                            ),
-                                                            child: const Text(
-                                                                "7.7⭐",
-                                                                style: TextStyle(
-                                                                    fontSize: 12,
-                                                                    color: Colors.yellow
-                                                                )
-                                                            )
-                                                        )
-                                                    )
-                                                ]
-                                            );
-                                        }
-                                    )
-                                ]
-                            )
-                        )
-                    ]
-                )
-            )
-        );
-    }
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 20),
+              Expanded(child: CustomedTabbar()),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
