@@ -29,39 +29,41 @@ class MovieDetials extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomedWatch(movie: movie,),
+                    CustomedWatch(movie: movie),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text("Screen Shots", style: textTitle.headlineSmall),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
 
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text("Similar ", style: textTitle.headlineSmall),
-                          SizedBox(height: 8),
-
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text("Summary", style: textTitle.headlineSmall),
-                          SizedBox(height: 8),
-                          Summary(movie: state.movie,),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
+                          Summary(movie: state.movie),
+                          const SizedBox(height: 8),
                           Text("Cast", style: textTitle.headlineSmall),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           CustomDetailsActors(movie: state.movie),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text("Genres", style: textTitle.headlineSmall),
-                          SizedBox(height: 8),
-                         if (movie.genres != null && movie.genres!.isNotEmpty)
-                         Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                            child: SizedBox(
+                          const SizedBox(height: 8),
+                          if (movie.genres != null && movie.genres!.isNotEmpty)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 8,
+                              ),
+                              child: SizedBox(
                                 width: double.infinity,
-                                child: CustomedGenres(genres: movie.genres!)
-                            )
-                        )
+                                child: CustomedGenres(genres: movie.genres!),
+                              ),
+                            ),
                         ],
                       ),
                     ),
@@ -77,5 +79,4 @@ class MovieDetials extends StatelessWidget {
       ),
     );
   }
-
 }
