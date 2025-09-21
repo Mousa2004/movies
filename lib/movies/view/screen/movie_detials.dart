@@ -5,11 +5,8 @@ import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/widget/LoadingIndicator.dart';
 import 'package:movies/movies/view/widget/custom_details_actors.dart';
 import 'package:movies/movies/view/widget/customed_watch.dart';
-import 'package:movies/movies/view/widget/screen_shots.dart';
 import 'package:movies/movies/view/widget/summary.dart';
 import 'package:movies/movies/view/widget/customed_genres.dart';
-
-import '../../../auth/view/screen/SimilarMoviesSection.dart';
 
 class MovieDetials extends StatelessWidget {
   static const String routeName = '/moviedetails';
@@ -32,7 +29,6 @@ class MovieDetials extends StatelessWidget {
               return SingleChildScrollView(
                 child: Column(
                   children: [
-                    CustomedWatch(movie: movie),
                     CustomedWatch(movie: movie),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 14),
