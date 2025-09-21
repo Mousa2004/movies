@@ -5,7 +5,6 @@ import 'package:movies/movies/data/models/movie_model.dart';
 class APIService {
   static const String baseUrl = "https://yts.mx/api/v2";
 
-
   static Future<List<MovieModel>> getMovies() async {
     final response = await http.get(
       Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"),
@@ -49,5 +48,4 @@ class APIService {
       throw Exception("Failed to load movie details for id $movieId");
     }
   }
-
 }

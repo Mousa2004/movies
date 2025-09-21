@@ -60,12 +60,7 @@ class CustomedTabbar extends StatelessWidget {
                         } else if (state is WatchListSuccess) {
                           if (state.watchList.isEmpty) {
                             return Center(
-                              child: Text(
-                                "Movie list is empty",
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                              ),
+                              child: Image.asset("assets/images/popcorn.png"),
                             );
                           }
                           return GridView.builder(
@@ -107,12 +102,7 @@ class CustomedTabbar extends StatelessWidget {
                         } else if (state is HistorySuccess) {
                           if (state.history.isEmpty) {
                             return Center(
-                              child: Text(
-                                "Movie list is empty",
-                                style: Theme.of(
-                                  context,
-                                ).textTheme.headlineSmall,
-                              ),
+                              child: Image.asset("assets/images/popcorn.png"),
                             );
                           }
                           return GridView.builder(

@@ -7,7 +7,7 @@ class ApiConst {
 
   static const String resetPasswordEndPoint = "auth/reset-password";
 
-  static const String updateProfileEndPoint = "profile";
+  static const String profileEndPoint = "profile";
 }
 
 class CacheConstant {
