@@ -61,5 +61,18 @@ class APIService {
     }
   }
 
+  /// 🔎 Search Movies by query
+  static Future<List<MovieModel>> searchMovies(String query) async {
+    final response = await http.get(
+      Uri.parse("$baseUrl/list_movies.json?query_term=$query"),
+    );
 
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List movies = data['data']['movies'] ?? [];
+      return movies.map((m) => MovieModel.fromJson(m)).toList();
+    } else {
+      throw Exception("Failed to search movies for query $query");
+    }
+  }
 }
