@@ -2,28 +2,30 @@ import 'package:equatable/equatable.dart';
 import 'package:movies/movies/data/models/movie_model.dart';
 
 abstract class SearchState extends Equatable {
-  @override
-  List<Object?> get props => [];
+    @override
+    List<Object?> get props => [];
 }
 
-class SearchInitial extends SearchState {}
+class SearchInitial extends SearchState {
+}
 
-class SearchLoading extends SearchState {}
+class SearchLoading extends SearchState {
+}
 
 class SearchLoaded extends SearchState {
-  final List<MovieModel> results;
+    final List<MovieModel> movies;
 
-  SearchLoaded(this.results);
+    SearchLoaded(this.movies);
 
-  @override
-  List<Object?> get props => [results];
+    @override
+    List<Object?> get props => [movies];
 }
 
 class SearchError extends SearchState {
-  final String message;
+    final String message;
 
-  SearchError(this.message);
+    SearchError(this.message);
 
-  @override
-  List<Object?> get props => [message];
+    @override
+    List<Object?> get props => [message];
 }

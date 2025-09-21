@@ -9,6 +9,7 @@ import 'package:movies/movies/bloc/movies_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/movies/view/screen/movie_detials.dart';
 import 'package:movies/movies/view/screen/update_profile_screen.dart';
+import 'package:movies/movies/view/screen/search_screen.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,10 +42,9 @@ class MoviesApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: showOnBoarding
             ? OnBoarding.routeName
-            // ignore: unnecessary_null_comparison
             : (checkLogin.getToken() != null
-                  ? HomeScreen.routName
-                  : LoginScreen.routName),
+            ? HomeScreen.routName
+            : LoginScreen.routName),
 
         routes: {
           HomeScreen.routName: (_) => const HomeScreen(),
@@ -53,7 +53,9 @@ class MoviesApp extends StatelessWidget {
           RegisterScreen.routName: (_) => RegisterScreen(),
           UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
           MovieDetials.routeName: (_) => MovieDetials(),
+          SearchScreen.routeName: (_) => const SearchScreen(), // ✅ Route بتاع Search
         },
+
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.dark,

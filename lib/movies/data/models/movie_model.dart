@@ -32,7 +32,6 @@ class MovieModel {
     int? dateUploadedUnix;
     List<CastModel>? cast;
 
-
     MovieModel({
         this.id,
         this.url,
@@ -60,7 +59,7 @@ class MovieModel {
         this.torrents,
         this.dateUploaded,
         this.dateUploadedUnix,
-        this.cast,
+        this.cast
 
     });
     factory MovieModel.fromJson(Map<String, dynamic> json) => MovieModel(
@@ -95,9 +94,8 @@ class MovieModel {
         dateUploaded: json['date_uploaded'] as String?,
         dateUploadedUnix: json['date_uploaded_unix'] as int?,
         cast: (json['cast'] as List<dynamic>?)
-        ?.map((e) => CastModel.fromJson(e as Map<String, dynamic>))
-        .toList(),
-
+            ?.map((e) => CastModel.fromJson(e as Map<String, dynamic>))
+            .toList()
 
     );
 
@@ -128,7 +126,7 @@ class MovieModel {
         'torrents': torrents?.map((e) => e.toJson()).toList(),
         'date_uploaded': dateUploaded,
         'date_uploaded_unix': dateUploadedUnix,
-          'cast': cast?.map((e) => e.toJson()).toList(),
+        'cast': cast?.map((e) => e.toJson()).toList()
     };
 
 }

@@ -1,15 +1,15 @@
 import 'package:equatable/equatable.dart';
 
 abstract class SearchEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
+    @override
+    List<Object?> get props => [];
 }
 
 class SearchMoviesEvent extends SearchEvent {
-  final String query;
+    final String query;
 
-  SearchMoviesEvent(this.query);
+    SearchMoviesEvent(this.query);
 
-  @override
-  List<Object?> get props => [query];
+    @override
+    List<Object?> get props => [query];
 }

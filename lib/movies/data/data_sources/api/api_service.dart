@@ -3,76 +3,76 @@ import 'package:http/http.dart' as http;
 import 'package:movies/movies/data/models/movie_model.dart';
 
 class APIService {
-  static const String baseUrl = "https://yts.mx/api/v2";
+    static const String baseUrl = "https://yts.mx/api/v2";
 
-  static Future<List<MovieModel>> getMovies() async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/list_movies.json?sort_by=date_added"),
-    );
+    static Future<List<MovieModel>> getMovies() async {
+        final response = await http.get(
+            Uri.parse("$baseUrl/list_movies.json?sort_by=date_added")
+        );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List movies = data['data']['movies'] ?? [];
-      return movies.map((m) => MovieModel.fromJson(m)).toList();
-    } else {
-      throw Exception("Failed to load latest movies");
+        if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            final List movies = data['data']['movies'] ?? [];
+            return movies.map((m) => MovieModel.fromJson(m)).toList();
+        } else {
+            throw Exception("Failed to load latest movies");
+        }
     }
-  }
 
-  static Future<List<MovieModel>> getMoviesByGenre(String genre) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/list_movies.json?genre=$genre&sort_by=year"),
-    );
+    static Future<List<MovieModel>> getMoviesByGenre(String genre) async {
+        final response = await http.get(
+            Uri.parse("$baseUrl/list_movies.json?genre=$genre&sort_by=year")
+        );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List movies = data['data']['movies'] ?? [];
-      return movies.map((m) => MovieModel.fromJson(m)).toList();
-    } else {
-      throw Exception("Failed to load movies for genre $genre");
+        if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            final List movies = data['data']['movies'] ?? [];
+            return movies.map((m) => MovieModel.fromJson(m)).toList();
+        } else {
+            throw Exception("Failed to load movies for genre $genre");
+        }
     }
-  }
 
-  static Future<MovieModel?> getMovieDetails(int movieId) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/movie_details.json?movie_id=$movieId&with_cast=true"),
-    );
+    static Future<MovieModel?> getMovieDetails(int movieId) async {
+        final response = await http.get(
+            Uri.parse("$baseUrl/movie_details.json?movie_id=$movieId&with_cast=true")
+        );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final movieJson = data['data']['movie'];
-      return MovieModel.fromJson(movieJson);
-    } else {
-      throw Exception("Failed to load movie details for id $movieId");
+        if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            final movieJson = data['data']['movie'];
+            return MovieModel.fromJson(movieJson);
+        } else {
+            throw Exception("Failed to load movie details for id $movieId");
+        }
     }
-  }
 
-  static Future<List<MovieModel>> getSimilarMovies(int movieId) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/movie_suggestions.json?movie_id=$movieId"),
-    );
+    static Future<List<MovieModel>> getSimilarMovies(int movieId) async {
+        final response = await http.get(
+            Uri.parse("$baseUrl/movie_suggestions.json?movie_id=$movieId")
+        );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List movies = data['data']['movies'] ?? [];
-      return movies.map((m) => MovieModel.fromJson(m)).toList();
-    } else {
-      throw Exception("Failed to load similar movies for id $movieId");
+        if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            final List movies = data['data']['movies'] ?? [];
+            return movies.map((m) => MovieModel.fromJson(m)).toList();
+        } else {
+            throw Exception("Failed to load similar movies for id $movieId");
+        }
     }
-  }
 
-  /// 🔎 Search Movies by query
-  static Future<List<MovieModel>> searchMovies(String query) async {
-    final response = await http.get(
-      Uri.parse("$baseUrl/list_movies.json?query_term=$query"),
-    );
+    /// 🔎 Search Movies by query
+    static Future<List<MovieModel>> searchMovies(String query) async {
+        final response = await http.get(
+            Uri.parse("$baseUrl/list_movies.json?query_term=$query")
+        );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final List movies = data['data']['movies'] ?? [];
-      return movies.map((m) => MovieModel.fromJson(m)).toList();
-    } else {
-      throw Exception("Failed to search movies for query $query");
+        if (response.statusCode == 200) {
+            final data = json.decode(response.body);
+            final List movies = data['data']['movies'] ?? [];
+            return movies.map((m) => MovieModel.fromJson(m)).toList();
+        } else {
+            throw Exception("Failed to search movies for query $query");
+        }
     }
-  }
 }
