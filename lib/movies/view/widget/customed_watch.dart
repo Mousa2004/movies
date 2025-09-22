@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/movies/bloc/history_bloc.dart';
+import 'package:movies/movies/bloc/watch_list_bloc.dart';
 import 'package:movies/movies/data/data_sources/api/watch_movie_data_sources.dart';
 import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/movies/view/widget/customed_evaluation.dart';
@@ -7,9 +10,8 @@ import 'package:movies/shared/view/widget/customed_button.dart';
 
 class CustomedWatch extends StatelessWidget {
   final MovieModel movie;
-  final void Function()? addWatchList;
 
-  const CustomedWatch({super.key, required this.movie, this.addWatchList});
+  const CustomedWatch({super.key, required this.movie});
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +58,14 @@ class CustomedWatch extends StatelessWidget {
                         },
                         child: const Icon(
                           Icons.arrow_back_ios,
-                          color: Colors.white,
+                          color: AppTheme.white,
                           size: 29,
                         ),
                       ),
                       InkWell(
-                        onTap: addWatchList,
+                        onTap: () {
+                          context.read<WatchListBloc>().addMovie(movie);
+                        },
                         child: Image.asset(
                           "assets/images/watch_list.png",
                           height: 20,
@@ -79,9 +83,8 @@ class CustomedWatch extends StatelessWidget {
                     child: Text(
                       movie.title ?? "No Title",
                       textAlign: TextAlign.center,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.headlineSmall!.copyWith(color: Colors.white),
+                      style: Theme.of(context).textTheme.headlineSmall!
+                          .copyWith(color: AppTheme.white),
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -89,7 +92,7 @@ class CustomedWatch extends StatelessWidget {
                     "${movie.year ?? 'Unknown'}",
                     style: Theme.of(
                       context,
-                    ).textTheme.titleLarge!.copyWith(color: Colors.white),
+                    ).textTheme.titleLarge!.copyWith(color: AppTheme.white),
                   ),
                   const SizedBox(height: 8),
                   CustomedButton(
@@ -97,6 +100,7 @@ class CustomedWatch extends StatelessWidget {
                     colorButton: AppTheme.red,
                     colorText: AppTheme.white,
                     onPressed: () async {
+                      context.read<HistoryBloc>().addMovieToHistoryList(movie);
                       await watchMovieDataSources.watchMovie(movie);
                     },
                   ),

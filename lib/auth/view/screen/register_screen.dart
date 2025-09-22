@@ -6,7 +6,6 @@ import 'package:movies/auth/data/models/register_request.dart';
 import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/widget/slider_image.dart';
 import 'package:movies/auth/view/widget/switch_language.dart';
-import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/dialog_message.dart';
@@ -141,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   DialogMessage.showSuccessMessage();
                   Navigator.of(
                     context,
-                  ).pushReplacementNamed(HomeScreen.routName);
+                  ).pushReplacementNamed(LoginScreen.routName);
                 }
               },
               builder: (context, state) {

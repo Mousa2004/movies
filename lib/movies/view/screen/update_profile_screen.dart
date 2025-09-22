@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:movies/auth/data/data_sources/image_list_data_sources.dart';
+import 'package:movies/auth/data/data_sources/local/auth_sharedprefrences_data_sources.dart';
+import 'package:movies/auth/view/screen/login_screen.dart';
 import 'package:movies/auth/view/screen/register_screen.dart';
 import 'package:movies/home/cubit/delete_profile_bloc.dart';
 import 'package:movies/home/cubit/delete_profile_state.dart';
@@ -13,6 +15,9 @@ import 'package:movies/home/cubit/update_profile_state.dart';
 import 'package:movies/home/data/models/reset_password_request.dart';
 import 'package:movies/home/data/models/update_profile_request.dart';
 import 'package:movies/home/view/widget/customed_show_reset_password.dart';
+import 'package:movies/movies/bloc/get_profile_bloc.dart';
+import 'package:movies/movies/bloc/get_profile_state.dart';
+import 'package:movies/movies/data/models/profile_request.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import 'package:movies/shared/view/widget/customed_button.dart';
 import 'package:movies/shared/view/widget/dialog_message.dart';
@@ -20,9 +25,9 @@ import 'package:movies/shared/view/widget/text_field.dart';
 import 'package:movies/shared/view/widget/validation_message.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  static const String routName = "/updateProfile";
+  final ProfileRequest profileRequest;
 
-  const UpdateProfileScreen({super.key});
+  const UpdateProfileScreen({super.key, required this.profileRequest});
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -39,6 +44,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   GoogleSignIn _googleSignIn = GoogleSignIn();
 
   int selectedAvatar = 1;
+  @override
+  void initState() {
+    nameController.text = widget.profileRequest.name!;
+    phoneController.text = widget.profileRequest.phone!;
+    selectedAvatar = widget.profileRequest.avaterId!;
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -64,12 +76,18 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             return Scaffold(
               appBar: AppBar(
                 title: Text("Update Profile"),
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back, color: AppTheme.yellow),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
+                actions: [
+                  IconButton(
+                    onPressed: () async {
+                      _googleSignIn.disconnect();
+                      await FirebaseAuth.instance.signOut();
+                      Navigator.of(
+                        context,
+                      ).pushReplacementNamed(LoginScreen.routName);
+                    },
+                    icon: Icon(Icons.exit_to_app),
+                  ),
+                ],
               ),
               body: SingleChildScrollView(
                 padding: EdgeInsets.all(16),
@@ -77,39 +95,68 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   key: formState,
                   child: Column(
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          _showAvatarPicker(innerContext);
-                        },
-                        child: CircleAvatar(
-                          radius: 50,
-                          backgroundImage: AssetImage(
-                            imageAvatarList[selectedAvatar - 1].imageName,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20),
+                      BlocBuilder<GetProfileBloc, GetProfileState>(
+                        builder: (context, state) {
+                          if (state is GetProfileError) {
+                            return Center(
+                              child: Text(
+                                state.message,
+                                style: Theme.of(
+                                  context,
+                                ).textTheme.headlineSmall,
+                              ),
+                            );
+                          } else if (state is GetProfileSuccess) {
+                            return Column(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    _showAvatarPicker(innerContext);
+                                  },
+                                  child: CircleAvatar(
+                                    radius: 50,
+                                    backgroundImage: AssetImage(
+                                      imageAvatarList[selectedAvatar - 1]
+                                          .imageName,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 20),
 
-                      CustomTextField(
-                        keyboardType: TextInputType.text,
-                        hint: "John Safwat",
-                        controller: nameController,
-                        prefixImage: "name_icon",
-                        fillColor: AppTheme.grey,
-                        validator: (val) {
-                          return validationMessage(val!, 50, 3, "name");
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                                CustomTextField(
+                                  keyboardType: TextInputType.text,
+                                  controller: nameController,
+                                  prefixImage: "name_icon",
+                                  fillColor: AppTheme.grey,
+                                  validator: (val) {
+                                    return validationMessage(
+                                      val!,
+                                      50,
+                                      3,
+                                      "name",
+                                    );
+                                  },
+                                ),
+                                const SizedBox(height: 16),
 
-                      CustomTextField(
-                        hint: "01200000000",
-                        controller: phoneController,
-                        keyboardType: TextInputType.phone,
-                        prefixImage: "phone",
-                        fillColor: AppTheme.grey,
-                        validator: (val) {
-                          return validationMessage(val!, 13, 11, "phone");
+                                CustomTextField(
+                                  controller: phoneController,
+                                  keyboardType: TextInputType.phone,
+                                  prefixImage: "phone",
+                                  fillColor: AppTheme.grey,
+                                  validator: (val) {
+                                    return validationMessage(
+                                      val!,
+                                      13,
+                                      11,
+                                      "phone",
+                                    );
+                                  },
+                                ),
+                              ],
+                            );
+                          }
+                          return SizedBox();
                         },
                       ),
                       const SizedBox(height: 16),
@@ -207,9 +254,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           DialogMessage.showSuccessMessage(
                             "Profile delete successfully",
                           );
-                          Navigator.of(
-                            context,
-                          ).pushReplacementNamed(RegisterScreen.routName);
+                          Navigator.of(context).pushNamedAndRemoveUntil(
+                            RegisterScreen.routName,
+                            (route) => false,
+                          );
                         }
                       },
                       builder: (context, state) {
@@ -225,8 +273,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   context
                                       .read<DeleteProfileBloc>()
                                       .deleteProfile();
-                                  _googleSignIn.disconnect();
-                                  await FirebaseAuth.instance.signOut();
+                                  final deleteToken =
+                                      AuthSharedprefrencesDataSources();
+                                  await deleteToken.clearToken();
                                 },
                         );
                       },
@@ -241,6 +290,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                           DialogMessage.showSuccessMessage(
                             "Profile update successfully",
                           );
+                          Navigator.of(context).pop(true);
                         }
                       },
                       builder: (context, state) {

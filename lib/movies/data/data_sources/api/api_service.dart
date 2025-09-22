@@ -60,6 +60,4 @@ class APIService {
       throw Exception("Failed to load similar movies for id $movieId");
     }
   }
-
-
 }
