@@ -46,11 +46,9 @@ class MovieDetials extends StatelessWidget {
                           SizedBox(height: 8),
                           ScreenShots(movie: state.movie),///
                           SizedBox(height: 8),
-
-                          SimilarMoviesSection(movieId: movie.id!),
-
+                          Text("Similar ", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
-
+                          SimilarMoviesSection(movieId: movie.id!),
                           SizedBox(height: 8),
                           Text("Summary", style: textTitle.headlineSmall),
                           SizedBox(height: 8),
