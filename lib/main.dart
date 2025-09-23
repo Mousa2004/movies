@@ -10,6 +10,8 @@ import 'package:movies/movies/bloc/movies_bloc.dart';
 import 'package:movies/movies/bloc/watch_list_bloc.dart';
 import 'package:movies/movies/view/screen/home_screen.dart';
 import 'package:movies/movies/view/screen/movie_detials.dart';
+import 'package:movies/movies/view/screen/update_profile_screen.dart';
+import 'package:movies/movies/view/screen/search_screen.dart';
 import 'package:movies/movies/view/screen/profile_tab.dart';
 import 'package:movies/onboarding/on_boarding.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
@@ -18,12 +20,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = MyBlocObserver();
 
-  final prefs = await SharedPreferences.getInstance();
-  final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
+    final prefs = await SharedPreferences.getInstance();
+    final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
 
   final authLocalDataSources = AuthSharedprefrencesDataSources();
   final String? token = await authLocalDataSources.getToken();
@@ -65,6 +68,7 @@ class MoviesApp extends StatelessWidget {
           RegisterScreen.routName: (_) => RegisterScreen(),
           ProfileTab.routName: (_) => ProfileTab(),
           MovieDetials.routeName: (_) => MovieDetials(),
+          SearchScreen.routeName:(_) => const SearchScreen()
         },
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
