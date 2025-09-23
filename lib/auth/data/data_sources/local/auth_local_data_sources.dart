@@ -1,4 +1,5 @@
 abstract class AuthLocalDataSources {
   Future<void> saveToken(String token);
-  Future<String> getToken();
+  Future<String?> getToken();
+  Future<void> clearToken();
 }

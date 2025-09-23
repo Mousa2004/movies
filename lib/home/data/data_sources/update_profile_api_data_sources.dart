@@ -17,7 +17,7 @@ class UpdateProfileApiDataSources {
     try {
       final token = await localDataSources.getToken();
       final response = await _dio.patch(
-        ApiConst.updateProfileEndPoint,
+        ApiConst.profileEndPoint,
         data: updateProfileRequest.toJson(),
         options: Options(headers: {"Authorization": "Bearer $token"}),
       );

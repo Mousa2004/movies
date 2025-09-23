@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/movies/bloc/movies_state.dart';
+import 'package:movies/movies/data/models/movie_model.dart';
 import 'package:movies/shared/view/widget/app_theme.dart';
 import '../../bloc/movies_bloc.dart';
 import '../widget/LoadingIndicator.dart';
@@ -8,7 +9,7 @@ import '../widget/movie_card.dart';
 
 class HomeTab extends StatelessWidget {
     HomeTab({super.key});
-
+MovieModel? movie;
     final PageController latestPageController = PageController(
         viewportFraction: 0.5
     );
@@ -25,7 +26,6 @@ class HomeTab extends StatelessWidget {
         return Stack(
             alignment: Alignment.center,
             children: [
-                // الخلفية
                 Image.asset(
                     "assets/images/onBoarding6.png",
                     height: height,
@@ -41,7 +41,6 @@ class HomeTab extends StatelessWidget {
                                 return Column(
                                     children: [
                                         SizedBox(height: 14),
-                                        // عنوان Available Now
                                         Image.asset(
                                             "assets/images/AvailableNow.png",
                                             height: height * 0.1,

@@ -4,10 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthSharedprefrencesDataSources implements AuthLocalDataSources {
   @override
-  Future<String> getToken() async {
+  Future<String?> getToken() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    return sharedPreferences.getString(CacheConstant.tokenKey) ?? "";
+
+    final token = await sharedPreferences.getString(CacheConstant.tokenKey);
+    return token;
   }
 
   @override
@@ -15,5 +17,12 @@ class AuthSharedprefrencesDataSources implements AuthLocalDataSources {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setString(CacheConstant.tokenKey, token);
+  }
+
+  @override
+  Future<void> clearToken() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    await sharedPreferences.remove(CacheConstant.tokenKey);
   }
 }

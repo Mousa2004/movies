@@ -60,7 +60,6 @@ class APIService {
             throw Exception("Failed to load similar movies for id $movieId");
         }
     }
-
     static Future<List<MovieModel>> searchMovies(String query) async {
         final response = await http.get(
             Uri.parse("$baseUrl/list_movies.json?query_term=$query")
@@ -74,4 +73,5 @@ class APIService {
             throw Exception("Failed to search movies for query $query");
         }
     }
+
 }
