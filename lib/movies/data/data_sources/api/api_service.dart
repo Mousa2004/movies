@@ -60,4 +60,18 @@ class APIService {
       throw Exception("Failed to load similar movies for id $movieId");
     }
   }
+
+  static Future<List<MovieModel>> searchMovies(String title) async {
+    final response = await http.get(
+      Uri.parse("$baseUrl/list_movies.json?query_term=$title"),
+    );
+
+    if (response.statusCode == 200) {
+      final json = jsonDecode(response.body);
+      final List movies = json['data']['movies'] ?? [];
+      return movies.map((e) => MovieModel.fromJson(e)).toList();
+    } else {
+      throw Exception('فشل في البحث: ${response.statusCode}');
+    }
+  }
 }

@@ -49,4 +49,16 @@ class AppTheme {
     ),
   );
   static ThemeData lightTheme = ThemeData();
+
+  static Color? get background => null;
+
+  static Color? get accent => null;
+
+  static Color? get textDim => null;
+
+  static Color? get danger => null;
+
+  static Color? get surface => null;
+
+  static Color? get textLight => null;
 }
