@@ -61,7 +61,6 @@ class APIService {
         }
     }
 
-    /// 🔎 Search Movies by query
     static Future<List<MovieModel>> searchMovies(String query) async {
         final response = await http.get(
             Uri.parse("$baseUrl/list_movies.json?query_term=$query")

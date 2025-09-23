@@ -16,50 +16,50 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
 
-  final prefs = await SharedPreferences.getInstance();
-  final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
+    final prefs = await SharedPreferences.getInstance();
+    final bool showOnBoarding = prefs.getBool("onboarding") ?? true;
 
-  runApp(MoviesApp(showOnBoarding: showOnBoarding));
+    runApp(MoviesApp(showOnBoarding: showOnBoarding));
 }
 
 class MoviesApp extends StatelessWidget {
-  final bool showOnBoarding;
+    final bool showOnBoarding;
 
-  const MoviesApp({super.key, required this.showOnBoarding});
+    const MoviesApp({super.key, required this.showOnBoarding});
 
-  @override
-  Widget build(BuildContext context) {
-    AuthLocalDataSources checkLogin = AuthSharedprefrencesDataSources();
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => MoviesBloc()..loadMovies()),
-        BlocProvider(create: (_) => AuthBloc()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: showOnBoarding
-            ? OnBoarding.routeName
-            : (checkLogin.getToken() != null
-            ? HomeScreen.routName
-            : LoginScreen.routName),
+    @override
+    Widget build(BuildContext context) {
+        AuthLocalDataSources checkLogin = AuthSharedprefrencesDataSources();
+        return MultiBlocProvider(
+            providers: [
+                BlocProvider(create: (_) => MoviesBloc()..loadMovies()),
+                BlocProvider(create: (_) => AuthBloc())
+            ],
+            child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                initialRoute: showOnBoarding
+                    ? OnBoarding.routeName
+                    : (checkLogin.getToken() != null
+                        ? HomeScreen.routName
+                        : LoginScreen.routName),
 
-        routes: {
-          HomeScreen.routName: (_) => const HomeScreen(),
-          OnBoarding.routeName: (_) => OnBoarding(),
-          LoginScreen.routName: (_) => LoginScreen(),
-          RegisterScreen.routName: (_) => RegisterScreen(),
-          UpdateProfileScreen.routName: (_) => UpdateProfileScreen(),
-          MovieDetials.routeName: (_) => MovieDetials(),
-          SearchScreen.routeName: (_) => const SearchScreen(), // ✅ Route بتاع Search
-        },
+                routes: {
+                    HomeScreen.routName:(_) => const HomeScreen(),
+                    OnBoarding.routeName:(_) => OnBoarding(),
+                    LoginScreen.routName:(_) => LoginScreen(),
+                    RegisterScreen.routName:(_) => RegisterScreen(),
+                    UpdateProfileScreen.routName:(_) => UpdateProfileScreen(),
+                    MovieDetials.routeName:(_) => MovieDetials(),
+                    SearchScreen.routeName:(_) => const SearchScreen() 
+                },
 
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        themeMode: ThemeMode.dark,
-      ),
-    );
-  }
+                theme: AppTheme.lightTheme,
+                darkTheme: AppTheme.darkTheme,
+                themeMode: ThemeMode.dark
+            )
+        );
+    }
 }
