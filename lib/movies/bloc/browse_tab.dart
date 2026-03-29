@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/movies/bloc/browse_cubit.dart';
 import 'package:movies/movies/bloc/movie_carde.dart';
+import '../bloc/browse_cubit.dart';
 
 class BrowseTab extends StatelessWidget {
- static const routName='BrowseTab';
+  const BrowseTab({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +65,7 @@ class BrowseTab extends StatelessWidget {
                             controller: controller,
                             children: genreList.map((genre) {
                               final filteredMovies = state.movies
-                                  .where((movie) =>
-                                  movie.genres.contains(genre))
+                                  .where((movie) => movie.genres.contains(genre))
                                   .toList();
 
                               if (filteredMovies.isEmpty) {
